@@ -1,0 +1,8 @@
+\
+\ Return the number of success expected for a given roll
+\
+diceX := 1;
+targetX := 4;
+
+count targetX <= (diceX#accumulate x:=d6 until x<6)
+

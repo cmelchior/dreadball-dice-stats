@@ -1,0 +1,18 @@
+<table>
+<tr>
+    <th><span><%= left %>+ \ <%= top %>+</span></th>
+<% _.each(labels.top, function(label) { %>
+    <th><span><%= label %></span></th>
+<% }) %>
+</tr>
+<% for (var i = 0; i < rows.length; i++) { %>
+<tr>
+    <td><span><%= labels.left[i] %></span></td>
+<% for (var j = 0; j < rows[i].length; j++) { %>
+    <td><%= rows[i][j] %></td>
+<% } %>
+</tr>
+<% } %>
+</table>
+
+

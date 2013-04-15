@@ -1,0 +1,133 @@
+local
+type t__1__ = (int*int)
+type t__2__ = (int*int)
+type t__3__ = (int*int)
+type t__4__ = (int*int)
+type t__5__ = (int*int)
+type t__6__ = (int*int)
+type t__7__ = (int*int)
+type t__8__ = (int*int)
+type t__9__ = (int*int)
+type t__10__ = (int*int)
+type t__11__ = (int*int)
+type t__12__ = (int*int)
+type t__13__ = (int*int)
+type t__14__ = (int*int)
+type t__15__ = (int*int)
+type t__16__ = (int*int)
+type t__17__ = (int*int)
+type t__18__ = (int*int)
+type t__19__ = (int*int)
+type t__20__ = (int*int)
+type t__21__ = (int*int)
+type t__22__ = (int*int)
+type t__23__ = (int*int)
+type t__24__ = (int*int)
+type t__25__ = string*(int*int)
+type t__26__ = (int*int)
+type t__27__ = (int*int)
+type t__28__ = (int*int)
+type t__29__ = (int*int)
+type t__30__ = (int*int)
+type t__31__ = (int*int)
+type t__32__ = (int*int)
+type t__33__ = (int*int)
+type t__34__ = (int*int)
+type t__35__ = (int*int)
+type t__36__ = (int*int)
+type t__37__ = (int*int)
+type t__38__ = (int*int)
+type t__39__ = (int*int)
+type t__40__ = (int*int)
+type t__41__ = (int*int)
+type t__42__ = (int*int)
+type t__43__ = int*(int*int)
+type t__44__ = (int*int)
+type t__45__ = (int*int)
+type t__46__ = (int*int)
+type t__47__ = (int*int)
+type t__48__ = real*(int*int)
+type t__49__ = (int*int)
+type t__50__ = (int*int)
+type t__51__ = (int*int)
+type t__52__ = (int*int)
+type t__53__ = (int*int)
+type t__54__ = string list *(int*int)
+type t__55__ = (int*int)
+type t__56__ = (int*int)
+type t__57__ = (int*int)
+type t__58__ = (int*int)
+type t__59__ = (int*int)
+type t__60__ = (int*int)
+type t__61__ = (int*int)
+type t__62__ = (int*int)
+type t__63__ = (int*int)
+in
+datatype token =
+    ACCUM of t__1__
+  | AND of t__2__
+  | ASSGN of t__3__
+  | CALL of t__4__
+  | CHOOSE of t__5__
+  | COMMA of t__6__
+  | COMPOSITIONAL of t__7__
+  | CONC of t__8__
+  | COUNT of t__9__
+  | D of t__10__
+  | DIFFERENT of t__11__
+  | DIVIDE of t__12__
+  | DO of t__13__
+  | DOTDOT of t__14__
+  | DROP of t__15__
+  | ELSE of t__16__
+  | EOF of t__17__
+  | EQ of t__18__
+  | FOREACH of t__19__
+  | FUNCTION of t__20__
+  | GE of t__21__
+  | GT of t__22__
+  | HASH of t__23__
+  | HCONC of t__24__
+  | ID of t__25__
+  | IF of t__26__
+  | IN of t__27__
+  | KEEP of t__28__
+  | LARGEST of t__29__
+  | LBRACE of t__30__
+  | LE of t__31__
+  | LEAST of t__32__
+  | LET of t__33__
+  | LPAR of t__34__
+  | LT of t__35__
+  | MAX of t__36__
+  | MAXIMAL of t__37__
+  | MEDIAN of t__38__
+  | MIN of t__39__
+  | MINIMAL of t__40__
+  | MINUS of t__41__
+  | NEQ of t__42__
+  | NUM of t__43__
+  | PICK of t__44__
+  | PLUS of t__45__
+  | QUESTION of t__46__
+  | RBRACE of t__47__
+  | REAL of t__48__
+  | REPEAT of t__49__
+  | RPAR of t__50__
+  | SAMPLE of t__51__
+  | SEMI of t__52__
+  | SETMINUS of t__53__
+  | STRINGS of t__54__
+  | SUM of t__55__
+  | THEN of t__56__
+  | TIMES of t__57__
+  | UNTIL of t__58__
+  | VCONCC of t__59__
+  | VCONCL of t__60__
+  | VCONCR of t__61__
+  | WHILE of t__62__
+  | Z of t__63__
+end;
+
+val Dice :
+  (Lexing.lexbuf -> token) -> Lexing.lexbuf -> Syntax.Program;

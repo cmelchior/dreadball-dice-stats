@@ -1,0 +1,8268 @@
+   0  $accept : %entry% $end
+
+   1  Dice : Decls Exp Decls EOF
+
+   2  Decls : Decl Decls
+   3        |
+
+   4  Decl : FUNCTION ID LPAR Ids RPAR EQ Exp
+   5       | COMPOSITIONAL ID LPAR Exp COMMA IDorUnop COMMA IDorBinop RPAR
+
+   6  IDorUnop : ID
+   7           | MINUS
+   8           | D
+   9           | Z
+  10           | SUM
+  11           | COUNT
+  12           | MIN
+  13           | MAX
+  14           | MINIMAL
+  15           | MAXIMAL
+  16           | CHOOSE
+  17           | DIFFERENT
+
+  18  IDorBinop : ID
+  19            | PLUS
+  20            | TIMES
+  21            | CONC
+
+  22  Ids : ID
+  23      | ID COMMA Ids
+
+  24  Exp : NUM
+  25      | ID
+  26      | Exp CONC Exp
+  27      | CHOOSE Exp
+  28      | DIFFERENT Exp
+  29      | LBRACE ExpList RBRACE
+  30      | Exp PLUS Exp
+  31      | Exp MINUS Exp
+  32      | Exp TIMES Exp
+  33      | Exp DIVIDE Exp
+  34      | MINUS Exp
+  35      | D Exp
+  36      | Z Exp
+  37      | SUM Exp
+  38      | COUNT Exp
+  39      | LEAST Exp Exp
+  40      | MIN Exp
+  41      | LARGEST Exp Exp
+  42      | MAX Exp
+  43      | MEDIAN Exp
+  44      | MINIMAL Exp
+  45      | MAXIMAL Exp
+  46      | Exp HASH Exp
+  47      | Exp AND Exp
+  48      | Exp D Exp
+  49      | Exp Z Exp
+  50      | Exp EQ Exp
+  51      | Exp NEQ Exp
+  52      | Exp LT Exp
+  53      | Exp GT Exp
+  54      | Exp LE Exp
+  55      | Exp GE Exp
+  56      | Exp DROP Exp
+  57      | Exp KEEP Exp
+  58      | Exp PICK Exp
+  59      | Exp SETMINUS Exp
+  60      | Exp DOTDOT Exp
+  61      | ID ASSGN Exp SEMI Exp
+  62      | ACCUM ID ASSGN Exp WHILE Exp
+  63      | ACCUM ID ASSGN Exp UNTIL Exp
+  64      | REPEAT ID ASSGN Exp WHILE Exp
+  65      | REPEAT ID ASSGN Exp UNTIL Exp
+  66      | FOREACH ID IN Exp DO Exp
+  67      | IF Exp THEN Exp ELSE Exp
+  68      | CALL ID LPAR ExpList2 RPAR
+  69      | STRINGS
+  70      | SAMPLE Exp
+  71      | Exp SAMPLE Exp
+  72      | Exp HCONC Exp
+  73      | Exp VCONCL Exp
+  74      | Exp VCONCR Exp
+  75      | Exp VCONCC Exp
+  76      | QUESTION REAL
+  77      | LPAR Exp RPAR
+
+  78  ExpList :
+  79          | ExpList1
+
+  80  ExpList1 : Exp
+  81           | Exp COMMA ExpList1
+
+  82  ExpList2 : Exp
+  83           | Exp COMMA ExpList2
+
+  84  %entry% : '\001' Dice
+
+state 0
+	$accept : . %entry% $end  (0)
+
+	'\001'  shift 1
+	.  error
+
+	%entry%  goto 2
+
+
+state 1
+	%entry% : '\001' . Dice  (84)
+	Decls : .  (3)
+
+	COMPOSITIONAL  shift 3
+	FUNCTION  shift 4
+	ACCUM  reduce 3
+	CALL  reduce 3
+	CHOOSE  reduce 3
+	COUNT  reduce 3
+	D  reduce 3
+	DIFFERENT  reduce 3
+	FOREACH  reduce 3
+	ID  reduce 3
+	IF  reduce 3
+	LARGEST  reduce 3
+	LBRACE  reduce 3
+	LEAST  reduce 3
+	LPAR  reduce 3
+	MAX  reduce 3
+	MAXIMAL  reduce 3
+	MEDIAN  reduce 3
+	MIN  reduce 3
+	MINIMAL  reduce 3
+	MINUS  reduce 3
+	NUM  reduce 3
+	QUESTION  reduce 3
+	REPEAT  reduce 3
+	SAMPLE  reduce 3
+	STRINGS  reduce 3
+	SUM  reduce 3
+	Z  reduce 3
+
+	Dice  goto 5
+	Decl  goto 6
+	Decls  goto 7
+
+
+state 2
+	$accept : %entry% . $end  (0)
+
+	$end  accept
+
+
+state 3
+	Decl : COMPOSITIONAL . ID LPAR Exp COMMA IDorUnop COMMA IDorBinop RPAR  (5)
+
+	ID  shift 8
+	.  error
+
+
+state 4
+	Decl : FUNCTION . ID LPAR Ids RPAR EQ Exp  (4)
+
+	ID  shift 9
+	.  error
+
+
+state 5
+	%entry% : '\001' Dice .  (84)
+
+	.  reduce 84
+
+
+state 6
+	Decls : Decl . Decls  (2)
+	Decls : .  (3)
+
+	COMPOSITIONAL  shift 3
+	FUNCTION  shift 4
+	ACCUM  reduce 3
+	CALL  reduce 3
+	CHOOSE  reduce 3
+	COUNT  reduce 3
+	D  reduce 3
+	DIFFERENT  reduce 3
+	EOF  reduce 3
+	FOREACH  reduce 3
+	ID  reduce 3
+	IF  reduce 3
+	LARGEST  reduce 3
+	LBRACE  reduce 3
+	LEAST  reduce 3
+	LPAR  reduce 3
+	MAX  reduce 3
+	MAXIMAL  reduce 3
+	MEDIAN  reduce 3
+	MIN  reduce 3
+	MINIMAL  reduce 3
+	MINUS  reduce 3
+	NUM  reduce 3
+	QUESTION  reduce 3
+	REPEAT  reduce 3
+	SAMPLE  reduce 3
+	STRINGS  reduce 3
+	SUM  reduce 3
+	Z  reduce 3
+
+	Decl  goto 6
+	Decls  goto 10
+
+
+state 7
+	Dice : Decls . Exp Decls EOF  (1)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 37
+
+
+state 8
+	Decl : COMPOSITIONAL ID . LPAR Exp COMMA IDorUnop COMMA IDorBinop RPAR  (5)
+
+	LPAR  shift 38
+	.  error
+
+
+state 9
+	Decl : FUNCTION ID . LPAR Ids RPAR EQ Exp  (4)
+
+	LPAR  shift 39
+	.  error
+
+
+state 10
+	Decls : Decl Decls .  (2)
+
+	.  reduce 2
+
+
+state 11
+	Exp : ACCUM . ID ASSGN Exp WHILE Exp  (62)
+	Exp : ACCUM . ID ASSGN Exp UNTIL Exp  (63)
+
+	ID  shift 40
+	.  error
+
+
+state 12
+	Exp : CALL . ID LPAR ExpList2 RPAR  (68)
+
+	ID  shift 41
+	.  error
+
+
+state 13
+	Exp : CHOOSE . Exp  (27)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 42
+
+
+state 14
+	Exp : COUNT . Exp  (38)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 43
+
+
+state 15
+	Exp : D . Exp  (35)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 44
+
+
+state 16
+	Exp : DIFFERENT . Exp  (28)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 45
+
+
+state 17
+	Exp : FOREACH . ID IN Exp DO Exp  (66)
+
+	ID  shift 46
+	.  error
+
+
+state 18
+	Exp : ID .  (25)
+	Exp : ID . ASSGN Exp SEMI Exp  (61)
+
+	ASSGN  shift 47
+	ACCUM  reduce 25
+	AND  reduce 25
+	CALL  reduce 25
+	CHOOSE  reduce 25
+	COMMA  reduce 25
+	COMPOSITIONAL  reduce 25
+	CONC  reduce 25
+	COUNT  reduce 25
+	D  reduce 25
+	DIFFERENT  reduce 25
+	DIVIDE  reduce 25
+	DO  reduce 25
+	DOTDOT  reduce 25
+	DROP  reduce 25
+	ELSE  reduce 25
+	EOF  reduce 25
+	EQ  reduce 25
+	FOREACH  reduce 25
+	FUNCTION  reduce 25
+	GE  reduce 25
+	GT  reduce 25
+	HASH  reduce 25
+	HCONC  reduce 25
+	ID  reduce 25
+	IF  reduce 25
+	KEEP  reduce 25
+	LARGEST  reduce 25
+	LBRACE  reduce 25
+	LE  reduce 25
+	LEAST  reduce 25
+	LPAR  reduce 25
+	LT  reduce 25
+	MAX  reduce 25
+	MAXIMAL  reduce 25
+	MEDIAN  reduce 25
+	MIN  reduce 25
+	MINIMAL  reduce 25
+	MINUS  reduce 25
+	NEQ  reduce 25
+	NUM  reduce 25
+	PICK  reduce 25
+	PLUS  reduce 25
+	QUESTION  reduce 25
+	RBRACE  reduce 25
+	REPEAT  reduce 25
+	RPAR  reduce 25
+	SAMPLE  reduce 25
+	SEMI  reduce 25
+	SETMINUS  reduce 25
+	STRINGS  reduce 25
+	SUM  reduce 25
+	THEN  reduce 25
+	TIMES  reduce 25
+	UNTIL  reduce 25
+	VCONCC  reduce 25
+	VCONCL  reduce 25
+	VCONCR  reduce 25
+	WHILE  reduce 25
+	Z  reduce 25
+
+
+state 19
+	Exp : IF . Exp THEN Exp ELSE Exp  (67)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 48
+
+
+state 20
+	Exp : LARGEST . Exp Exp  (41)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 49
+
+
+state 21
+	Exp : LBRACE . ExpList RBRACE  (29)
+	ExpList : .  (78)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	RBRACE  reduce 78
+
+	Exp  goto 50
+	ExpList  goto 51
+	ExpList1  goto 52
+
+
+state 22
+	Exp : LEAST . Exp Exp  (39)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 53
+
+
+state 23
+	Exp : LPAR . Exp RPAR  (77)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 54
+
+
+state 24
+	Exp : MAX . Exp  (42)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 55
+
+
+state 25
+	Exp : MAXIMAL . Exp  (45)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 56
+
+
+state 26
+	Exp : MEDIAN . Exp  (43)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 57
+
+
+state 27
+	Exp : MIN . Exp  (40)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 58
+
+
+state 28
+	Exp : MINIMAL . Exp  (44)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 59
+
+
+state 29
+	Exp : MINUS . Exp  (34)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 60
+
+
+state 30
+	Exp : NUM .  (24)
+
+	.  reduce 24
+
+
+state 31
+	Exp : QUESTION . REAL  (76)
+
+	REAL  shift 61
+	.  error
+
+
+state 32
+	Exp : REPEAT . ID ASSGN Exp WHILE Exp  (64)
+	Exp : REPEAT . ID ASSGN Exp UNTIL Exp  (65)
+
+	ID  shift 62
+	.  error
+
+
+state 33
+	Exp : SAMPLE . Exp  (70)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 63
+
+
+state 34
+	Exp : STRINGS .  (69)
+
+	.  reduce 69
+
+
+state 35
+	Exp : SUM . Exp  (37)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 64
+
+
+state 36
+	Exp : Z . Exp  (36)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 65
+
+
+state 37
+	Dice : Decls Exp . Decls EOF  (1)
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+	Decls : .  (3)
+
+	AND  shift 66
+	COMPOSITIONAL  shift 3
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	FUNCTION  shift 4
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	EOF  reduce 3
+
+	Decl  goto 6
+	Decls  goto 91
+
+
+state 38
+	Decl : COMPOSITIONAL ID LPAR . Exp COMMA IDorUnop COMMA IDorBinop RPAR  (5)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 92
+
+
+state 39
+	Decl : FUNCTION ID LPAR . Ids RPAR EQ Exp  (4)
+
+	ID  shift 93
+	.  error
+
+	Ids  goto 94
+
+
+state 40
+	Exp : ACCUM ID . ASSGN Exp WHILE Exp  (62)
+	Exp : ACCUM ID . ASSGN Exp UNTIL Exp  (63)
+
+	ASSGN  shift 95
+	.  error
+
+
+state 41
+	Exp : CALL ID . LPAR ExpList2 RPAR  (68)
+
+	LPAR  shift 96
+	.  error
+
+
+state 42
+	Exp : Exp . CONC Exp  (26)
+	Exp : CHOOSE Exp .  (27)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 27
+	AND  reduce 27
+	CALL  reduce 27
+	CHOOSE  reduce 27
+	COMMA  reduce 27
+	COMPOSITIONAL  reduce 27
+	CONC  reduce 27
+	COUNT  reduce 27
+	DIFFERENT  reduce 27
+	DIVIDE  reduce 27
+	DO  reduce 27
+	DOTDOT  reduce 27
+	DROP  reduce 27
+	ELSE  reduce 27
+	EOF  reduce 27
+	FOREACH  reduce 27
+	FUNCTION  reduce 27
+	HCONC  reduce 27
+	ID  reduce 27
+	IF  reduce 27
+	KEEP  reduce 27
+	LARGEST  reduce 27
+	LBRACE  reduce 27
+	LEAST  reduce 27
+	LPAR  reduce 27
+	MAX  reduce 27
+	MAXIMAL  reduce 27
+	MEDIAN  reduce 27
+	MIN  reduce 27
+	MINIMAL  reduce 27
+	MINUS  reduce 27
+	NUM  reduce 27
+	PICK  reduce 27
+	PLUS  reduce 27
+	QUESTION  reduce 27
+	RBRACE  reduce 27
+	REPEAT  reduce 27
+	RPAR  reduce 27
+	SEMI  reduce 27
+	SETMINUS  reduce 27
+	STRINGS  reduce 27
+	SUM  reduce 27
+	THEN  reduce 27
+	TIMES  reduce 27
+	UNTIL  reduce 27
+	VCONCC  reduce 27
+	VCONCL  reduce 27
+	VCONCR  reduce 27
+	WHILE  reduce 27
+
+
+state 43
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : COUNT Exp .  (38)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 38
+	AND  reduce 38
+	CALL  reduce 38
+	CHOOSE  reduce 38
+	COMMA  reduce 38
+	COMPOSITIONAL  reduce 38
+	CONC  reduce 38
+	COUNT  reduce 38
+	DIFFERENT  reduce 38
+	DIVIDE  reduce 38
+	DO  reduce 38
+	DOTDOT  reduce 38
+	DROP  reduce 38
+	ELSE  reduce 38
+	EOF  reduce 38
+	FOREACH  reduce 38
+	FUNCTION  reduce 38
+	HCONC  reduce 38
+	ID  reduce 38
+	IF  reduce 38
+	KEEP  reduce 38
+	LARGEST  reduce 38
+	LBRACE  reduce 38
+	LEAST  reduce 38
+	LPAR  reduce 38
+	MAX  reduce 38
+	MAXIMAL  reduce 38
+	MEDIAN  reduce 38
+	MIN  reduce 38
+	MINIMAL  reduce 38
+	MINUS  reduce 38
+	NUM  reduce 38
+	PICK  reduce 38
+	PLUS  reduce 38
+	QUESTION  reduce 38
+	RBRACE  reduce 38
+	REPEAT  reduce 38
+	RPAR  reduce 38
+	SEMI  reduce 38
+	SETMINUS  reduce 38
+	STRINGS  reduce 38
+	SUM  reduce 38
+	THEN  reduce 38
+	TIMES  reduce 38
+	UNTIL  reduce 38
+	VCONCC  reduce 38
+	VCONCL  reduce 38
+	VCONCR  reduce 38
+	WHILE  reduce 38
+
+
+state 44
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : D Exp .  (35)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	ACCUM  reduce 35
+	AND  reduce 35
+	CALL  reduce 35
+	CHOOSE  reduce 35
+	COMMA  reduce 35
+	COMPOSITIONAL  reduce 35
+	CONC  reduce 35
+	COUNT  reduce 35
+	D  reduce 35
+	DIFFERENT  reduce 35
+	DIVIDE  reduce 35
+	DO  reduce 35
+	DOTDOT  reduce 35
+	DROP  reduce 35
+	ELSE  reduce 35
+	EOF  reduce 35
+	EQ  reduce 35
+	FOREACH  reduce 35
+	FUNCTION  reduce 35
+	GE  reduce 35
+	GT  reduce 35
+	HASH  reduce 35
+	HCONC  reduce 35
+	ID  reduce 35
+	IF  reduce 35
+	KEEP  reduce 35
+	LARGEST  reduce 35
+	LBRACE  reduce 35
+	LE  reduce 35
+	LEAST  reduce 35
+	LPAR  reduce 35
+	LT  reduce 35
+	MAX  reduce 35
+	MAXIMAL  reduce 35
+	MEDIAN  reduce 35
+	MIN  reduce 35
+	MINIMAL  reduce 35
+	MINUS  reduce 35
+	NEQ  reduce 35
+	NUM  reduce 35
+	PICK  reduce 35
+	PLUS  reduce 35
+	QUESTION  reduce 35
+	RBRACE  reduce 35
+	REPEAT  reduce 35
+	RPAR  reduce 35
+	SAMPLE  reduce 35
+	SEMI  reduce 35
+	SETMINUS  reduce 35
+	STRINGS  reduce 35
+	SUM  reduce 35
+	THEN  reduce 35
+	TIMES  reduce 35
+	UNTIL  reduce 35
+	VCONCC  reduce 35
+	VCONCL  reduce 35
+	VCONCR  reduce 35
+	WHILE  reduce 35
+	Z  reduce 35
+
+
+state 45
+	Exp : Exp . CONC Exp  (26)
+	Exp : DIFFERENT Exp .  (28)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 28
+	AND  reduce 28
+	CALL  reduce 28
+	CHOOSE  reduce 28
+	COMMA  reduce 28
+	COMPOSITIONAL  reduce 28
+	CONC  reduce 28
+	COUNT  reduce 28
+	DIFFERENT  reduce 28
+	DIVIDE  reduce 28
+	DO  reduce 28
+	DOTDOT  reduce 28
+	DROP  reduce 28
+	ELSE  reduce 28
+	EOF  reduce 28
+	FOREACH  reduce 28
+	FUNCTION  reduce 28
+	HCONC  reduce 28
+	ID  reduce 28
+	IF  reduce 28
+	KEEP  reduce 28
+	LARGEST  reduce 28
+	LBRACE  reduce 28
+	LEAST  reduce 28
+	LPAR  reduce 28
+	MAX  reduce 28
+	MAXIMAL  reduce 28
+	MEDIAN  reduce 28
+	MIN  reduce 28
+	MINIMAL  reduce 28
+	MINUS  reduce 28
+	NUM  reduce 28
+	PICK  reduce 28
+	PLUS  reduce 28
+	QUESTION  reduce 28
+	RBRACE  reduce 28
+	REPEAT  reduce 28
+	RPAR  reduce 28
+	SEMI  reduce 28
+	SETMINUS  reduce 28
+	STRINGS  reduce 28
+	SUM  reduce 28
+	THEN  reduce 28
+	TIMES  reduce 28
+	UNTIL  reduce 28
+	VCONCC  reduce 28
+	VCONCL  reduce 28
+	VCONCR  reduce 28
+	WHILE  reduce 28
+
+
+state 46
+	Exp : FOREACH ID . IN Exp DO Exp  (66)
+
+	IN  shift 97
+	.  error
+
+
+state 47
+	Exp : ID ASSGN . Exp SEMI Exp  (61)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 98
+
+
+state 48
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : IF Exp . THEN Exp ELSE Exp  (67)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	THEN  shift 99
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	.  error
+
+
+state 49
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : LARGEST Exp . Exp  (41)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	ACCUM  shift 11
+	AND  shift 66
+	CALL  shift 12
+	CHOOSE  shift 13
+	CONC  shift 67
+	COUNT  shift 14
+	D  shift 100
+	DIFFERENT  shift 16
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	FOREACH  shift 17
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	ID  shift 18
+	IF  shift 19
+	KEEP  shift 77
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LE  shift 78
+	LEAST  shift 22
+	LPAR  shift 23
+	LT  shift 79
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 101
+	NEQ  shift 81
+	NUM  shift 30
+	PICK  shift 82
+	PLUS  shift 83
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 102
+	SETMINUS  shift 85
+	STRINGS  shift 34
+	SUM  shift 35
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 103
+	.  error
+
+	Exp  goto 104
+
+
+state 50
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+	ExpList1 : Exp .  (80)
+	ExpList1 : Exp . COMMA ExpList1  (81)
+
+	AND  shift 66
+	COMMA  shift 105
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	RBRACE  reduce 80
+
+
+state 51
+	Exp : LBRACE ExpList . RBRACE  (29)
+
+	RBRACE  shift 106
+	.  error
+
+
+state 52
+	ExpList : ExpList1 .  (79)
+
+	.  reduce 79
+
+
+state 53
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : LEAST Exp . Exp  (39)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	ACCUM  shift 11
+	AND  shift 66
+	CALL  shift 12
+	CHOOSE  shift 13
+	CONC  shift 67
+	COUNT  shift 14
+	D  shift 100
+	DIFFERENT  shift 16
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	FOREACH  shift 17
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	ID  shift 18
+	IF  shift 19
+	KEEP  shift 77
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LE  shift 78
+	LEAST  shift 22
+	LPAR  shift 23
+	LT  shift 79
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 101
+	NEQ  shift 81
+	NUM  shift 30
+	PICK  shift 82
+	PLUS  shift 83
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 102
+	SETMINUS  shift 85
+	STRINGS  shift 34
+	SUM  shift 35
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 103
+	.  error
+
+	Exp  goto 107
+
+
+state 54
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+	Exp : LPAR Exp . RPAR  (77)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	RPAR  shift 108
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	.  error
+
+
+state 55
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : MAX Exp .  (42)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 42
+	AND  reduce 42
+	CALL  reduce 42
+	CHOOSE  reduce 42
+	COMMA  reduce 42
+	COMPOSITIONAL  reduce 42
+	CONC  reduce 42
+	COUNT  reduce 42
+	DIFFERENT  reduce 42
+	DIVIDE  reduce 42
+	DO  reduce 42
+	DOTDOT  reduce 42
+	DROP  reduce 42
+	ELSE  reduce 42
+	EOF  reduce 42
+	FOREACH  reduce 42
+	FUNCTION  reduce 42
+	HCONC  reduce 42
+	ID  reduce 42
+	IF  reduce 42
+	KEEP  reduce 42
+	LARGEST  reduce 42
+	LBRACE  reduce 42
+	LEAST  reduce 42
+	LPAR  reduce 42
+	MAX  reduce 42
+	MAXIMAL  reduce 42
+	MEDIAN  reduce 42
+	MIN  reduce 42
+	MINIMAL  reduce 42
+	MINUS  reduce 42
+	NUM  reduce 42
+	PICK  reduce 42
+	PLUS  reduce 42
+	QUESTION  reduce 42
+	RBRACE  reduce 42
+	REPEAT  reduce 42
+	RPAR  reduce 42
+	SEMI  reduce 42
+	SETMINUS  reduce 42
+	STRINGS  reduce 42
+	SUM  reduce 42
+	THEN  reduce 42
+	TIMES  reduce 42
+	UNTIL  reduce 42
+	VCONCC  reduce 42
+	VCONCL  reduce 42
+	VCONCR  reduce 42
+	WHILE  reduce 42
+
+
+state 56
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : MAXIMAL Exp .  (45)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 45
+	AND  reduce 45
+	CALL  reduce 45
+	CHOOSE  reduce 45
+	COMMA  reduce 45
+	COMPOSITIONAL  reduce 45
+	CONC  reduce 45
+	COUNT  reduce 45
+	DIFFERENT  reduce 45
+	DIVIDE  reduce 45
+	DO  reduce 45
+	DOTDOT  reduce 45
+	DROP  reduce 45
+	ELSE  reduce 45
+	EOF  reduce 45
+	FOREACH  reduce 45
+	FUNCTION  reduce 45
+	HCONC  reduce 45
+	ID  reduce 45
+	IF  reduce 45
+	KEEP  reduce 45
+	LARGEST  reduce 45
+	LBRACE  reduce 45
+	LEAST  reduce 45
+	LPAR  reduce 45
+	MAX  reduce 45
+	MAXIMAL  reduce 45
+	MEDIAN  reduce 45
+	MIN  reduce 45
+	MINIMAL  reduce 45
+	MINUS  reduce 45
+	NUM  reduce 45
+	PICK  reduce 45
+	PLUS  reduce 45
+	QUESTION  reduce 45
+	RBRACE  reduce 45
+	REPEAT  reduce 45
+	RPAR  reduce 45
+	SEMI  reduce 45
+	SETMINUS  reduce 45
+	STRINGS  reduce 45
+	SUM  reduce 45
+	THEN  reduce 45
+	TIMES  reduce 45
+	UNTIL  reduce 45
+	VCONCC  reduce 45
+	VCONCL  reduce 45
+	VCONCR  reduce 45
+	WHILE  reduce 45
+
+
+state 57
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : MEDIAN Exp .  (43)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 43
+	AND  reduce 43
+	CALL  reduce 43
+	CHOOSE  reduce 43
+	COMMA  reduce 43
+	COMPOSITIONAL  reduce 43
+	CONC  reduce 43
+	COUNT  reduce 43
+	DIFFERENT  reduce 43
+	DIVIDE  reduce 43
+	DO  reduce 43
+	DOTDOT  reduce 43
+	DROP  reduce 43
+	ELSE  reduce 43
+	EOF  reduce 43
+	FOREACH  reduce 43
+	FUNCTION  reduce 43
+	HCONC  reduce 43
+	ID  reduce 43
+	IF  reduce 43
+	KEEP  reduce 43
+	LARGEST  reduce 43
+	LBRACE  reduce 43
+	LEAST  reduce 43
+	LPAR  reduce 43
+	MAX  reduce 43
+	MAXIMAL  reduce 43
+	MEDIAN  reduce 43
+	MIN  reduce 43
+	MINIMAL  reduce 43
+	MINUS  reduce 43
+	NUM  reduce 43
+	PICK  reduce 43
+	PLUS  reduce 43
+	QUESTION  reduce 43
+	RBRACE  reduce 43
+	REPEAT  reduce 43
+	RPAR  reduce 43
+	SEMI  reduce 43
+	SETMINUS  reduce 43
+	STRINGS  reduce 43
+	SUM  reduce 43
+	THEN  reduce 43
+	TIMES  reduce 43
+	UNTIL  reduce 43
+	VCONCC  reduce 43
+	VCONCL  reduce 43
+	VCONCR  reduce 43
+	WHILE  reduce 43
+
+
+state 58
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : MIN Exp .  (40)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 40
+	AND  reduce 40
+	CALL  reduce 40
+	CHOOSE  reduce 40
+	COMMA  reduce 40
+	COMPOSITIONAL  reduce 40
+	CONC  reduce 40
+	COUNT  reduce 40
+	DIFFERENT  reduce 40
+	DIVIDE  reduce 40
+	DO  reduce 40
+	DOTDOT  reduce 40
+	DROP  reduce 40
+	ELSE  reduce 40
+	EOF  reduce 40
+	FOREACH  reduce 40
+	FUNCTION  reduce 40
+	HCONC  reduce 40
+	ID  reduce 40
+	IF  reduce 40
+	KEEP  reduce 40
+	LARGEST  reduce 40
+	LBRACE  reduce 40
+	LEAST  reduce 40
+	LPAR  reduce 40
+	MAX  reduce 40
+	MAXIMAL  reduce 40
+	MEDIAN  reduce 40
+	MIN  reduce 40
+	MINIMAL  reduce 40
+	MINUS  reduce 40
+	NUM  reduce 40
+	PICK  reduce 40
+	PLUS  reduce 40
+	QUESTION  reduce 40
+	RBRACE  reduce 40
+	REPEAT  reduce 40
+	RPAR  reduce 40
+	SEMI  reduce 40
+	SETMINUS  reduce 40
+	STRINGS  reduce 40
+	SUM  reduce 40
+	THEN  reduce 40
+	TIMES  reduce 40
+	UNTIL  reduce 40
+	VCONCC  reduce 40
+	VCONCL  reduce 40
+	VCONCR  reduce 40
+	WHILE  reduce 40
+
+
+state 59
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : MINIMAL Exp .  (44)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 44
+	AND  reduce 44
+	CALL  reduce 44
+	CHOOSE  reduce 44
+	COMMA  reduce 44
+	COMPOSITIONAL  reduce 44
+	CONC  reduce 44
+	COUNT  reduce 44
+	DIFFERENT  reduce 44
+	DIVIDE  reduce 44
+	DO  reduce 44
+	DOTDOT  reduce 44
+	DROP  reduce 44
+	ELSE  reduce 44
+	EOF  reduce 44
+	FOREACH  reduce 44
+	FUNCTION  reduce 44
+	HCONC  reduce 44
+	ID  reduce 44
+	IF  reduce 44
+	KEEP  reduce 44
+	LARGEST  reduce 44
+	LBRACE  reduce 44
+	LEAST  reduce 44
+	LPAR  reduce 44
+	MAX  reduce 44
+	MAXIMAL  reduce 44
+	MEDIAN  reduce 44
+	MIN  reduce 44
+	MINIMAL  reduce 44
+	MINUS  reduce 44
+	NUM  reduce 44
+	PICK  reduce 44
+	PLUS  reduce 44
+	QUESTION  reduce 44
+	RBRACE  reduce 44
+	REPEAT  reduce 44
+	RPAR  reduce 44
+	SEMI  reduce 44
+	SETMINUS  reduce 44
+	STRINGS  reduce 44
+	SUM  reduce 44
+	THEN  reduce 44
+	TIMES  reduce 44
+	UNTIL  reduce 44
+	VCONCC  reduce 44
+	VCONCL  reduce 44
+	VCONCR  reduce 44
+	WHILE  reduce 44
+
+
+state 60
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : MINUS Exp .  (34)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	SAMPLE  shift 84
+	Z  shift 90
+	ACCUM  reduce 34
+	AND  reduce 34
+	CALL  reduce 34
+	CHOOSE  reduce 34
+	COMMA  reduce 34
+	COMPOSITIONAL  reduce 34
+	CONC  reduce 34
+	COUNT  reduce 34
+	DIFFERENT  reduce 34
+	DIVIDE  reduce 34
+	DO  reduce 34
+	DOTDOT  reduce 34
+	DROP  reduce 34
+	ELSE  reduce 34
+	EOF  reduce 34
+	FOREACH  reduce 34
+	FUNCTION  reduce 34
+	HCONC  reduce 34
+	ID  reduce 34
+	IF  reduce 34
+	KEEP  reduce 34
+	LARGEST  reduce 34
+	LBRACE  reduce 34
+	LEAST  reduce 34
+	LPAR  reduce 34
+	MAX  reduce 34
+	MAXIMAL  reduce 34
+	MEDIAN  reduce 34
+	MIN  reduce 34
+	MINIMAL  reduce 34
+	MINUS  reduce 34
+	NUM  reduce 34
+	PICK  reduce 34
+	PLUS  reduce 34
+	QUESTION  reduce 34
+	RBRACE  reduce 34
+	REPEAT  reduce 34
+	RPAR  reduce 34
+	SEMI  reduce 34
+	SETMINUS  reduce 34
+	STRINGS  reduce 34
+	SUM  reduce 34
+	THEN  reduce 34
+	TIMES  reduce 34
+	UNTIL  reduce 34
+	VCONCC  reduce 34
+	VCONCL  reduce 34
+	VCONCR  reduce 34
+	WHILE  reduce 34
+
+
+state 61
+	Exp : QUESTION REAL .  (76)
+
+	.  reduce 76
+
+
+state 62
+	Exp : REPEAT ID . ASSGN Exp WHILE Exp  (64)
+	Exp : REPEAT ID . ASSGN Exp UNTIL Exp  (65)
+
+	ASSGN  shift 109
+	.  error
+
+
+state 63
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : SAMPLE Exp .  (70)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 70
+	AND  reduce 70
+	CALL  reduce 70
+	CHOOSE  reduce 70
+	COMMA  reduce 70
+	COMPOSITIONAL  reduce 70
+	CONC  reduce 70
+	COUNT  reduce 70
+	DIFFERENT  reduce 70
+	DIVIDE  reduce 70
+	DO  reduce 70
+	DOTDOT  reduce 70
+	DROP  reduce 70
+	ELSE  reduce 70
+	EOF  reduce 70
+	FOREACH  reduce 70
+	FUNCTION  reduce 70
+	HCONC  reduce 70
+	ID  reduce 70
+	IF  reduce 70
+	KEEP  reduce 70
+	LARGEST  reduce 70
+	LBRACE  reduce 70
+	LEAST  reduce 70
+	LPAR  reduce 70
+	MAX  reduce 70
+	MAXIMAL  reduce 70
+	MEDIAN  reduce 70
+	MIN  reduce 70
+	MINIMAL  reduce 70
+	MINUS  reduce 70
+	NUM  reduce 70
+	PICK  reduce 70
+	PLUS  reduce 70
+	QUESTION  reduce 70
+	RBRACE  reduce 70
+	REPEAT  reduce 70
+	RPAR  reduce 70
+	SEMI  reduce 70
+	SETMINUS  reduce 70
+	STRINGS  reduce 70
+	SUM  reduce 70
+	THEN  reduce 70
+	TIMES  reduce 70
+	UNTIL  reduce 70
+	VCONCC  reduce 70
+	VCONCL  reduce 70
+	VCONCR  reduce 70
+	WHILE  reduce 70
+
+
+state 64
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : SUM Exp .  (37)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 37
+	AND  reduce 37
+	CALL  reduce 37
+	CHOOSE  reduce 37
+	COMMA  reduce 37
+	COMPOSITIONAL  reduce 37
+	CONC  reduce 37
+	COUNT  reduce 37
+	DIFFERENT  reduce 37
+	DIVIDE  reduce 37
+	DO  reduce 37
+	DOTDOT  reduce 37
+	DROP  reduce 37
+	ELSE  reduce 37
+	EOF  reduce 37
+	FOREACH  reduce 37
+	FUNCTION  reduce 37
+	HCONC  reduce 37
+	ID  reduce 37
+	IF  reduce 37
+	KEEP  reduce 37
+	LARGEST  reduce 37
+	LBRACE  reduce 37
+	LEAST  reduce 37
+	LPAR  reduce 37
+	MAX  reduce 37
+	MAXIMAL  reduce 37
+	MEDIAN  reduce 37
+	MIN  reduce 37
+	MINIMAL  reduce 37
+	MINUS  reduce 37
+	NUM  reduce 37
+	PICK  reduce 37
+	PLUS  reduce 37
+	QUESTION  reduce 37
+	RBRACE  reduce 37
+	REPEAT  reduce 37
+	RPAR  reduce 37
+	SEMI  reduce 37
+	SETMINUS  reduce 37
+	STRINGS  reduce 37
+	SUM  reduce 37
+	THEN  reduce 37
+	TIMES  reduce 37
+	UNTIL  reduce 37
+	VCONCC  reduce 37
+	VCONCL  reduce 37
+	VCONCR  reduce 37
+	WHILE  reduce 37
+
+
+state 65
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Z Exp .  (36)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	ACCUM  reduce 36
+	AND  reduce 36
+	CALL  reduce 36
+	CHOOSE  reduce 36
+	COMMA  reduce 36
+	COMPOSITIONAL  reduce 36
+	CONC  reduce 36
+	COUNT  reduce 36
+	D  reduce 36
+	DIFFERENT  reduce 36
+	DIVIDE  reduce 36
+	DO  reduce 36
+	DOTDOT  reduce 36
+	DROP  reduce 36
+	ELSE  reduce 36
+	EOF  reduce 36
+	EQ  reduce 36
+	FOREACH  reduce 36
+	FUNCTION  reduce 36
+	GE  reduce 36
+	GT  reduce 36
+	HASH  reduce 36
+	HCONC  reduce 36
+	ID  reduce 36
+	IF  reduce 36
+	KEEP  reduce 36
+	LARGEST  reduce 36
+	LBRACE  reduce 36
+	LE  reduce 36
+	LEAST  reduce 36
+	LPAR  reduce 36
+	LT  reduce 36
+	MAX  reduce 36
+	MAXIMAL  reduce 36
+	MEDIAN  reduce 36
+	MIN  reduce 36
+	MINIMAL  reduce 36
+	MINUS  reduce 36
+	NEQ  reduce 36
+	NUM  reduce 36
+	PICK  reduce 36
+	PLUS  reduce 36
+	QUESTION  reduce 36
+	RBRACE  reduce 36
+	REPEAT  reduce 36
+	RPAR  reduce 36
+	SAMPLE  reduce 36
+	SEMI  reduce 36
+	SETMINUS  reduce 36
+	STRINGS  reduce 36
+	SUM  reduce 36
+	THEN  reduce 36
+	TIMES  reduce 36
+	UNTIL  reduce 36
+	VCONCC  reduce 36
+	VCONCL  reduce 36
+	VCONCR  reduce 36
+	WHILE  reduce 36
+	Z  reduce 36
+
+
+state 66
+	Exp : Exp AND . Exp  (47)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 110
+
+
+state 67
+	Exp : Exp CONC . Exp  (26)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 111
+
+
+state 68
+	Exp : Exp D . Exp  (48)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 112
+
+
+state 69
+	Exp : Exp DIVIDE . Exp  (33)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 113
+
+
+state 70
+	Exp : Exp DOTDOT . Exp  (60)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 114
+
+
+state 71
+	Exp : Exp DROP . Exp  (56)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 115
+
+
+state 72
+	Exp : Exp EQ . Exp  (50)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 116
+
+
+state 73
+	Exp : Exp GE . Exp  (55)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 117
+
+
+state 74
+	Exp : Exp GT . Exp  (53)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 118
+
+
+state 75
+	Exp : Exp HASH . Exp  (46)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 119
+
+
+state 76
+	Exp : Exp HCONC . Exp  (72)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 120
+
+
+state 77
+	Exp : Exp KEEP . Exp  (57)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 121
+
+
+state 78
+	Exp : Exp LE . Exp  (54)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 122
+
+
+state 79
+	Exp : Exp LT . Exp  (52)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 123
+
+
+state 80
+	Exp : Exp MINUS . Exp  (31)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 124
+
+
+state 81
+	Exp : Exp NEQ . Exp  (51)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 125
+
+
+state 82
+	Exp : Exp PICK . Exp  (58)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 126
+
+
+state 83
+	Exp : Exp PLUS . Exp  (30)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 127
+
+
+state 84
+	Exp : Exp SAMPLE . Exp  (71)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 128
+
+
+state 85
+	Exp : Exp SETMINUS . Exp  (59)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 129
+
+
+state 86
+	Exp : Exp TIMES . Exp  (32)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 130
+
+
+state 87
+	Exp : Exp VCONCC . Exp  (75)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 131
+
+
+state 88
+	Exp : Exp VCONCL . Exp  (73)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 132
+
+
+state 89
+	Exp : Exp VCONCR . Exp  (74)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 133
+
+
+state 90
+	Exp : Exp Z . Exp  (49)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 134
+
+
+state 91
+	Dice : Decls Exp Decls . EOF  (1)
+
+	EOF  shift 135
+	.  error
+
+
+state 92
+	Decl : COMPOSITIONAL ID LPAR Exp . COMMA IDorUnop COMMA IDorBinop RPAR  (5)
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	COMMA  shift 136
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	.  error
+
+
+state 93
+	Ids : ID .  (22)
+	Ids : ID . COMMA Ids  (23)
+
+	COMMA  shift 137
+	RPAR  reduce 22
+
+
+state 94
+	Decl : FUNCTION ID LPAR Ids . RPAR EQ Exp  (4)
+
+	RPAR  shift 138
+	.  error
+
+
+state 95
+	Exp : ACCUM ID ASSGN . Exp WHILE Exp  (62)
+	Exp : ACCUM ID ASSGN . Exp UNTIL Exp  (63)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 139
+
+
+state 96
+	Exp : CALL ID LPAR . ExpList2 RPAR  (68)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 140
+	ExpList2  goto 141
+
+
+state 97
+	Exp : FOREACH ID IN . Exp DO Exp  (66)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 142
+
+
+state 98
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : ID ASSGN Exp . SEMI Exp  (61)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SEMI  shift 143
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	.  error
+
+
+state 99
+	Exp : IF Exp THEN . Exp ELSE Exp  (67)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 144
+
+
+state 100
+	Exp : D . Exp  (35)
+	Exp : Exp D . Exp  (48)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 145
+
+
+state 101
+	Exp : Exp MINUS . Exp  (31)
+	Exp : MINUS . Exp  (34)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 146
+
+
+state 102
+	Exp : SAMPLE . Exp  (70)
+	Exp : Exp SAMPLE . Exp  (71)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 147
+
+
+state 103
+	Exp : Z . Exp  (36)
+	Exp : Exp Z . Exp  (49)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 148
+
+
+state 104
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : LARGEST Exp Exp .  (41)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 41
+	AND  reduce 41
+	CALL  reduce 41
+	CHOOSE  reduce 41
+	COMMA  reduce 41
+	COMPOSITIONAL  reduce 41
+	CONC  reduce 41
+	COUNT  reduce 41
+	DIFFERENT  reduce 41
+	DIVIDE  reduce 41
+	DO  reduce 41
+	DOTDOT  reduce 41
+	DROP  reduce 41
+	ELSE  reduce 41
+	EOF  reduce 41
+	FOREACH  reduce 41
+	FUNCTION  reduce 41
+	HCONC  reduce 41
+	ID  reduce 41
+	IF  reduce 41
+	KEEP  reduce 41
+	LARGEST  reduce 41
+	LBRACE  reduce 41
+	LEAST  reduce 41
+	LPAR  reduce 41
+	MAX  reduce 41
+	MAXIMAL  reduce 41
+	MEDIAN  reduce 41
+	MIN  reduce 41
+	MINIMAL  reduce 41
+	MINUS  reduce 41
+	NUM  reduce 41
+	PICK  reduce 41
+	PLUS  reduce 41
+	QUESTION  reduce 41
+	RBRACE  reduce 41
+	REPEAT  reduce 41
+	RPAR  reduce 41
+	SEMI  reduce 41
+	SETMINUS  reduce 41
+	STRINGS  reduce 41
+	SUM  reduce 41
+	THEN  reduce 41
+	TIMES  reduce 41
+	UNTIL  reduce 41
+	VCONCC  reduce 41
+	VCONCL  reduce 41
+	VCONCR  reduce 41
+	WHILE  reduce 41
+
+
+state 105
+	ExpList1 : Exp COMMA . ExpList1  (81)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 50
+	ExpList1  goto 149
+
+
+state 106
+	Exp : LBRACE ExpList RBRACE .  (29)
+
+	.  reduce 29
+
+
+state 107
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : LEAST Exp Exp .  (39)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 39
+	AND  reduce 39
+	CALL  reduce 39
+	CHOOSE  reduce 39
+	COMMA  reduce 39
+	COMPOSITIONAL  reduce 39
+	CONC  reduce 39
+	COUNT  reduce 39
+	DIFFERENT  reduce 39
+	DIVIDE  reduce 39
+	DO  reduce 39
+	DOTDOT  reduce 39
+	DROP  reduce 39
+	ELSE  reduce 39
+	EOF  reduce 39
+	FOREACH  reduce 39
+	FUNCTION  reduce 39
+	HCONC  reduce 39
+	ID  reduce 39
+	IF  reduce 39
+	KEEP  reduce 39
+	LARGEST  reduce 39
+	LBRACE  reduce 39
+	LEAST  reduce 39
+	LPAR  reduce 39
+	MAX  reduce 39
+	MAXIMAL  reduce 39
+	MEDIAN  reduce 39
+	MIN  reduce 39
+	MINIMAL  reduce 39
+	MINUS  reduce 39
+	NUM  reduce 39
+	PICK  reduce 39
+	PLUS  reduce 39
+	QUESTION  reduce 39
+	RBRACE  reduce 39
+	REPEAT  reduce 39
+	RPAR  reduce 39
+	SEMI  reduce 39
+	SETMINUS  reduce 39
+	STRINGS  reduce 39
+	SUM  reduce 39
+	THEN  reduce 39
+	TIMES  reduce 39
+	UNTIL  reduce 39
+	VCONCC  reduce 39
+	VCONCL  reduce 39
+	VCONCR  reduce 39
+	WHILE  reduce 39
+
+
+state 108
+	Exp : LPAR Exp RPAR .  (77)
+
+	.  reduce 77
+
+
+state 109
+	Exp : REPEAT ID ASSGN . Exp WHILE Exp  (64)
+	Exp : REPEAT ID ASSGN . Exp UNTIL Exp  (65)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 150
+
+
+state 110
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp AND Exp .  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PLUS  shift 83
+	SAMPLE  shift 84
+	TIMES  shift 86
+	Z  shift 90
+	ACCUM  reduce 47
+	CALL  reduce 47
+	CHOOSE  reduce 47
+	COMMA  reduce 47
+	COMPOSITIONAL  reduce 47
+	COUNT  reduce 47
+	DIFFERENT  reduce 47
+	DO  reduce 47
+	DOTDOT  reduce 47
+	DROP  reduce 47
+	ELSE  reduce 47
+	EOF  reduce 47
+	FOREACH  reduce 47
+	FUNCTION  reduce 47
+	HCONC  reduce 47
+	ID  reduce 47
+	IF  reduce 47
+	KEEP  reduce 47
+	LARGEST  reduce 47
+	LBRACE  reduce 47
+	LEAST  reduce 47
+	LPAR  reduce 47
+	MAX  reduce 47
+	MAXIMAL  reduce 47
+	MEDIAN  reduce 47
+	MIN  reduce 47
+	MINIMAL  reduce 47
+	NUM  reduce 47
+	PICK  reduce 47
+	QUESTION  reduce 47
+	RBRACE  reduce 47
+	REPEAT  reduce 47
+	RPAR  reduce 47
+	SEMI  reduce 47
+	SETMINUS  reduce 47
+	STRINGS  reduce 47
+	SUM  reduce 47
+	THEN  reduce 47
+	UNTIL  reduce 47
+	VCONCC  reduce 47
+	VCONCL  reduce 47
+	VCONCR  reduce 47
+	WHILE  reduce 47
+
+
+state 111
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp CONC Exp .  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PLUS  shift 83
+	SAMPLE  shift 84
+	TIMES  shift 86
+	Z  shift 90
+	ACCUM  reduce 26
+	CALL  reduce 26
+	CHOOSE  reduce 26
+	COMMA  reduce 26
+	COMPOSITIONAL  reduce 26
+	COUNT  reduce 26
+	DIFFERENT  reduce 26
+	DO  reduce 26
+	DOTDOT  reduce 26
+	DROP  reduce 26
+	ELSE  reduce 26
+	EOF  reduce 26
+	FOREACH  reduce 26
+	FUNCTION  reduce 26
+	HCONC  reduce 26
+	ID  reduce 26
+	IF  reduce 26
+	KEEP  reduce 26
+	LARGEST  reduce 26
+	LBRACE  reduce 26
+	LEAST  reduce 26
+	LPAR  reduce 26
+	MAX  reduce 26
+	MAXIMAL  reduce 26
+	MEDIAN  reduce 26
+	MIN  reduce 26
+	MINIMAL  reduce 26
+	NUM  reduce 26
+	PICK  reduce 26
+	QUESTION  reduce 26
+	RBRACE  reduce 26
+	REPEAT  reduce 26
+	RPAR  reduce 26
+	SEMI  reduce 26
+	SETMINUS  reduce 26
+	STRINGS  reduce 26
+	SUM  reduce 26
+	THEN  reduce 26
+	UNTIL  reduce 26
+	VCONCC  reduce 26
+	VCONCL  reduce 26
+	VCONCR  reduce 26
+	WHILE  reduce 26
+
+
+state 112
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp D Exp .  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	HASH  shift 75
+	Z  shift 90
+	ACCUM  reduce 48
+	AND  reduce 48
+	CALL  reduce 48
+	CHOOSE  reduce 48
+	COMMA  reduce 48
+	COMPOSITIONAL  reduce 48
+	CONC  reduce 48
+	COUNT  reduce 48
+	DIFFERENT  reduce 48
+	DIVIDE  reduce 48
+	DO  reduce 48
+	DOTDOT  reduce 48
+	DROP  reduce 48
+	ELSE  reduce 48
+	EOF  reduce 48
+	EQ  reduce 48
+	FOREACH  reduce 48
+	FUNCTION  reduce 48
+	GE  reduce 48
+	GT  reduce 48
+	HCONC  reduce 48
+	ID  reduce 48
+	IF  reduce 48
+	KEEP  reduce 48
+	LARGEST  reduce 48
+	LBRACE  reduce 48
+	LE  reduce 48
+	LEAST  reduce 48
+	LPAR  reduce 48
+	LT  reduce 48
+	MAX  reduce 48
+	MAXIMAL  reduce 48
+	MEDIAN  reduce 48
+	MIN  reduce 48
+	MINIMAL  reduce 48
+	MINUS  reduce 48
+	NEQ  reduce 48
+	NUM  reduce 48
+	PICK  reduce 48
+	PLUS  reduce 48
+	QUESTION  reduce 48
+	RBRACE  reduce 48
+	REPEAT  reduce 48
+	RPAR  reduce 48
+	SAMPLE  reduce 48
+	SEMI  reduce 48
+	SETMINUS  reduce 48
+	STRINGS  reduce 48
+	SUM  reduce 48
+	THEN  reduce 48
+	TIMES  reduce 48
+	UNTIL  reduce 48
+	VCONCC  reduce 48
+	VCONCL  reduce 48
+	VCONCR  reduce 48
+	WHILE  reduce 48
+
+
+state 113
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp DIVIDE Exp .  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	SAMPLE  shift 84
+	Z  shift 90
+	ACCUM  reduce 33
+	AND  reduce 33
+	CALL  reduce 33
+	CHOOSE  reduce 33
+	COMMA  reduce 33
+	COMPOSITIONAL  reduce 33
+	CONC  reduce 33
+	COUNT  reduce 33
+	DIFFERENT  reduce 33
+	DIVIDE  reduce 33
+	DO  reduce 33
+	DOTDOT  reduce 33
+	DROP  reduce 33
+	ELSE  reduce 33
+	EOF  reduce 33
+	FOREACH  reduce 33
+	FUNCTION  reduce 33
+	HCONC  reduce 33
+	ID  reduce 33
+	IF  reduce 33
+	KEEP  reduce 33
+	LARGEST  reduce 33
+	LBRACE  reduce 33
+	LEAST  reduce 33
+	LPAR  reduce 33
+	MAX  reduce 33
+	MAXIMAL  reduce 33
+	MEDIAN  reduce 33
+	MIN  reduce 33
+	MINIMAL  reduce 33
+	MINUS  reduce 33
+	NUM  reduce 33
+	PICK  reduce 33
+	PLUS  reduce 33
+	QUESTION  reduce 33
+	RBRACE  reduce 33
+	REPEAT  reduce 33
+	RPAR  reduce 33
+	SEMI  reduce 33
+	SETMINUS  reduce 33
+	STRINGS  reduce 33
+	SUM  reduce 33
+	THEN  reduce 33
+	TIMES  reduce 33
+	UNTIL  reduce 33
+	VCONCC  reduce 33
+	VCONCL  reduce 33
+	VCONCR  reduce 33
+	WHILE  reduce 33
+
+
+state 114
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp DOTDOT Exp .  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	Z  shift 90
+	ACCUM  reduce 60
+	CALL  reduce 60
+	CHOOSE  reduce 60
+	COMMA  reduce 60
+	COMPOSITIONAL  reduce 60
+	COUNT  reduce 60
+	DIFFERENT  reduce 60
+	DO  reduce 60
+	ELSE  reduce 60
+	EOF  reduce 60
+	FOREACH  reduce 60
+	FUNCTION  reduce 60
+	HCONC  reduce 60
+	ID  reduce 60
+	IF  reduce 60
+	LARGEST  reduce 60
+	LBRACE  reduce 60
+	LEAST  reduce 60
+	LPAR  reduce 60
+	MAX  reduce 60
+	MAXIMAL  reduce 60
+	MEDIAN  reduce 60
+	MIN  reduce 60
+	MINIMAL  reduce 60
+	NUM  reduce 60
+	QUESTION  reduce 60
+	RBRACE  reduce 60
+	REPEAT  reduce 60
+	RPAR  reduce 60
+	SEMI  reduce 60
+	STRINGS  reduce 60
+	SUM  reduce 60
+	THEN  reduce 60
+	UNTIL  reduce 60
+	VCONCC  reduce 60
+	VCONCL  reduce 60
+	VCONCR  reduce 60
+	WHILE  reduce 60
+
+
+state 115
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp DROP Exp .  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PLUS  shift 83
+	SAMPLE  shift 84
+	TIMES  shift 86
+	Z  shift 90
+	ACCUM  reduce 56
+	CALL  reduce 56
+	CHOOSE  reduce 56
+	COMMA  reduce 56
+	COMPOSITIONAL  reduce 56
+	COUNT  reduce 56
+	DIFFERENT  reduce 56
+	DO  reduce 56
+	DOTDOT  reduce 56
+	DROP  reduce 56
+	ELSE  reduce 56
+	EOF  reduce 56
+	FOREACH  reduce 56
+	FUNCTION  reduce 56
+	HCONC  reduce 56
+	ID  reduce 56
+	IF  reduce 56
+	KEEP  reduce 56
+	LARGEST  reduce 56
+	LBRACE  reduce 56
+	LEAST  reduce 56
+	LPAR  reduce 56
+	MAX  reduce 56
+	MAXIMAL  reduce 56
+	MEDIAN  reduce 56
+	MIN  reduce 56
+	MINIMAL  reduce 56
+	NUM  reduce 56
+	PICK  reduce 56
+	QUESTION  reduce 56
+	RBRACE  reduce 56
+	REPEAT  reduce 56
+	RPAR  reduce 56
+	SEMI  reduce 56
+	SETMINUS  reduce 56
+	STRINGS  reduce 56
+	SUM  reduce 56
+	THEN  reduce 56
+	UNTIL  reduce 56
+	VCONCC  reduce 56
+	VCONCL  reduce 56
+	VCONCR  reduce 56
+	WHILE  reduce 56
+
+
+state 116
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp EQ Exp .  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 50
+	AND  reduce 50
+	CALL  reduce 50
+	CHOOSE  reduce 50
+	COMMA  reduce 50
+	COMPOSITIONAL  reduce 50
+	CONC  reduce 50
+	COUNT  reduce 50
+	DIFFERENT  reduce 50
+	DIVIDE  reduce 50
+	DO  reduce 50
+	DOTDOT  reduce 50
+	DROP  reduce 50
+	ELSE  reduce 50
+	EOF  reduce 50
+	FOREACH  reduce 50
+	FUNCTION  reduce 50
+	HCONC  reduce 50
+	ID  reduce 50
+	IF  reduce 50
+	KEEP  reduce 50
+	LARGEST  reduce 50
+	LBRACE  reduce 50
+	LEAST  reduce 50
+	LPAR  reduce 50
+	MAX  reduce 50
+	MAXIMAL  reduce 50
+	MEDIAN  reduce 50
+	MIN  reduce 50
+	MINIMAL  reduce 50
+	MINUS  reduce 50
+	NUM  reduce 50
+	PICK  reduce 50
+	PLUS  reduce 50
+	QUESTION  reduce 50
+	RBRACE  reduce 50
+	REPEAT  reduce 50
+	RPAR  reduce 50
+	SAMPLE  reduce 50
+	SEMI  reduce 50
+	SETMINUS  reduce 50
+	STRINGS  reduce 50
+	SUM  reduce 50
+	THEN  reduce 50
+	TIMES  reduce 50
+	UNTIL  reduce 50
+	VCONCC  reduce 50
+	VCONCL  reduce 50
+	VCONCR  reduce 50
+	WHILE  reduce 50
+
+
+state 117
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp GE Exp .  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 55
+	AND  reduce 55
+	CALL  reduce 55
+	CHOOSE  reduce 55
+	COMMA  reduce 55
+	COMPOSITIONAL  reduce 55
+	CONC  reduce 55
+	COUNT  reduce 55
+	DIFFERENT  reduce 55
+	DIVIDE  reduce 55
+	DO  reduce 55
+	DOTDOT  reduce 55
+	DROP  reduce 55
+	ELSE  reduce 55
+	EOF  reduce 55
+	FOREACH  reduce 55
+	FUNCTION  reduce 55
+	HCONC  reduce 55
+	ID  reduce 55
+	IF  reduce 55
+	KEEP  reduce 55
+	LARGEST  reduce 55
+	LBRACE  reduce 55
+	LEAST  reduce 55
+	LPAR  reduce 55
+	MAX  reduce 55
+	MAXIMAL  reduce 55
+	MEDIAN  reduce 55
+	MIN  reduce 55
+	MINIMAL  reduce 55
+	MINUS  reduce 55
+	NUM  reduce 55
+	PICK  reduce 55
+	PLUS  reduce 55
+	QUESTION  reduce 55
+	RBRACE  reduce 55
+	REPEAT  reduce 55
+	RPAR  reduce 55
+	SAMPLE  reduce 55
+	SEMI  reduce 55
+	SETMINUS  reduce 55
+	STRINGS  reduce 55
+	SUM  reduce 55
+	THEN  reduce 55
+	TIMES  reduce 55
+	UNTIL  reduce 55
+	VCONCC  reduce 55
+	VCONCL  reduce 55
+	VCONCR  reduce 55
+	WHILE  reduce 55
+
+
+state 118
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp GT Exp .  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 53
+	AND  reduce 53
+	CALL  reduce 53
+	CHOOSE  reduce 53
+	COMMA  reduce 53
+	COMPOSITIONAL  reduce 53
+	CONC  reduce 53
+	COUNT  reduce 53
+	DIFFERENT  reduce 53
+	DIVIDE  reduce 53
+	DO  reduce 53
+	DOTDOT  reduce 53
+	DROP  reduce 53
+	ELSE  reduce 53
+	EOF  reduce 53
+	FOREACH  reduce 53
+	FUNCTION  reduce 53
+	HCONC  reduce 53
+	ID  reduce 53
+	IF  reduce 53
+	KEEP  reduce 53
+	LARGEST  reduce 53
+	LBRACE  reduce 53
+	LEAST  reduce 53
+	LPAR  reduce 53
+	MAX  reduce 53
+	MAXIMAL  reduce 53
+	MEDIAN  reduce 53
+	MIN  reduce 53
+	MINIMAL  reduce 53
+	MINUS  reduce 53
+	NUM  reduce 53
+	PICK  reduce 53
+	PLUS  reduce 53
+	QUESTION  reduce 53
+	RBRACE  reduce 53
+	REPEAT  reduce 53
+	RPAR  reduce 53
+	SAMPLE  reduce 53
+	SEMI  reduce 53
+	SETMINUS  reduce 53
+	STRINGS  reduce 53
+	SUM  reduce 53
+	THEN  reduce 53
+	TIMES  reduce 53
+	UNTIL  reduce 53
+	VCONCC  reduce 53
+	VCONCL  reduce 53
+	VCONCR  reduce 53
+	WHILE  reduce 53
+
+
+state 119
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp HASH Exp .  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	HASH  shift 75
+	Z  shift 90
+	ACCUM  reduce 46
+	AND  reduce 46
+	CALL  reduce 46
+	CHOOSE  reduce 46
+	COMMA  reduce 46
+	COMPOSITIONAL  reduce 46
+	CONC  reduce 46
+	COUNT  reduce 46
+	DIFFERENT  reduce 46
+	DIVIDE  reduce 46
+	DO  reduce 46
+	DOTDOT  reduce 46
+	DROP  reduce 46
+	ELSE  reduce 46
+	EOF  reduce 46
+	EQ  reduce 46
+	FOREACH  reduce 46
+	FUNCTION  reduce 46
+	GE  reduce 46
+	GT  reduce 46
+	HCONC  reduce 46
+	ID  reduce 46
+	IF  reduce 46
+	KEEP  reduce 46
+	LARGEST  reduce 46
+	LBRACE  reduce 46
+	LE  reduce 46
+	LEAST  reduce 46
+	LPAR  reduce 46
+	LT  reduce 46
+	MAX  reduce 46
+	MAXIMAL  reduce 46
+	MEDIAN  reduce 46
+	MIN  reduce 46
+	MINIMAL  reduce 46
+	MINUS  reduce 46
+	NEQ  reduce 46
+	NUM  reduce 46
+	PICK  reduce 46
+	PLUS  reduce 46
+	QUESTION  reduce 46
+	RBRACE  reduce 46
+	REPEAT  reduce 46
+	RPAR  reduce 46
+	SAMPLE  reduce 46
+	SEMI  reduce 46
+	SETMINUS  reduce 46
+	STRINGS  reduce 46
+	SUM  reduce 46
+	THEN  reduce 46
+	TIMES  reduce 46
+	UNTIL  reduce 46
+	VCONCC  reduce 46
+	VCONCL  reduce 46
+	VCONCR  reduce 46
+	WHILE  reduce 46
+
+
+state 120
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp HCONC Exp .  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 72
+	CALL  reduce 72
+	CHOOSE  reduce 72
+	COMMA  reduce 72
+	COMPOSITIONAL  reduce 72
+	COUNT  reduce 72
+	DIFFERENT  reduce 72
+	DO  reduce 72
+	ELSE  reduce 72
+	EOF  reduce 72
+	FOREACH  reduce 72
+	FUNCTION  reduce 72
+	ID  reduce 72
+	IF  reduce 72
+	LARGEST  reduce 72
+	LBRACE  reduce 72
+	LEAST  reduce 72
+	LPAR  reduce 72
+	MAX  reduce 72
+	MAXIMAL  reduce 72
+	MEDIAN  reduce 72
+	MIN  reduce 72
+	MINIMAL  reduce 72
+	NUM  reduce 72
+	QUESTION  reduce 72
+	RBRACE  reduce 72
+	REPEAT  reduce 72
+	RPAR  reduce 72
+	SEMI  reduce 72
+	STRINGS  reduce 72
+	SUM  reduce 72
+	THEN  reduce 72
+	UNTIL  reduce 72
+	WHILE  reduce 72
+
+
+state 121
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp KEEP Exp .  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PLUS  shift 83
+	SAMPLE  shift 84
+	TIMES  shift 86
+	Z  shift 90
+	ACCUM  reduce 57
+	CALL  reduce 57
+	CHOOSE  reduce 57
+	COMMA  reduce 57
+	COMPOSITIONAL  reduce 57
+	COUNT  reduce 57
+	DIFFERENT  reduce 57
+	DO  reduce 57
+	DOTDOT  reduce 57
+	DROP  reduce 57
+	ELSE  reduce 57
+	EOF  reduce 57
+	FOREACH  reduce 57
+	FUNCTION  reduce 57
+	HCONC  reduce 57
+	ID  reduce 57
+	IF  reduce 57
+	KEEP  reduce 57
+	LARGEST  reduce 57
+	LBRACE  reduce 57
+	LEAST  reduce 57
+	LPAR  reduce 57
+	MAX  reduce 57
+	MAXIMAL  reduce 57
+	MEDIAN  reduce 57
+	MIN  reduce 57
+	MINIMAL  reduce 57
+	NUM  reduce 57
+	PICK  reduce 57
+	QUESTION  reduce 57
+	RBRACE  reduce 57
+	REPEAT  reduce 57
+	RPAR  reduce 57
+	SEMI  reduce 57
+	SETMINUS  reduce 57
+	STRINGS  reduce 57
+	SUM  reduce 57
+	THEN  reduce 57
+	UNTIL  reduce 57
+	VCONCC  reduce 57
+	VCONCL  reduce 57
+	VCONCR  reduce 57
+	WHILE  reduce 57
+
+
+state 122
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp LE Exp .  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 54
+	AND  reduce 54
+	CALL  reduce 54
+	CHOOSE  reduce 54
+	COMMA  reduce 54
+	COMPOSITIONAL  reduce 54
+	CONC  reduce 54
+	COUNT  reduce 54
+	DIFFERENT  reduce 54
+	DIVIDE  reduce 54
+	DO  reduce 54
+	DOTDOT  reduce 54
+	DROP  reduce 54
+	ELSE  reduce 54
+	EOF  reduce 54
+	FOREACH  reduce 54
+	FUNCTION  reduce 54
+	HCONC  reduce 54
+	ID  reduce 54
+	IF  reduce 54
+	KEEP  reduce 54
+	LARGEST  reduce 54
+	LBRACE  reduce 54
+	LEAST  reduce 54
+	LPAR  reduce 54
+	MAX  reduce 54
+	MAXIMAL  reduce 54
+	MEDIAN  reduce 54
+	MIN  reduce 54
+	MINIMAL  reduce 54
+	MINUS  reduce 54
+	NUM  reduce 54
+	PICK  reduce 54
+	PLUS  reduce 54
+	QUESTION  reduce 54
+	RBRACE  reduce 54
+	REPEAT  reduce 54
+	RPAR  reduce 54
+	SAMPLE  reduce 54
+	SEMI  reduce 54
+	SETMINUS  reduce 54
+	STRINGS  reduce 54
+	SUM  reduce 54
+	THEN  reduce 54
+	TIMES  reduce 54
+	UNTIL  reduce 54
+	VCONCC  reduce 54
+	VCONCL  reduce 54
+	VCONCR  reduce 54
+	WHILE  reduce 54
+
+
+state 123
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp LT Exp .  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 52
+	AND  reduce 52
+	CALL  reduce 52
+	CHOOSE  reduce 52
+	COMMA  reduce 52
+	COMPOSITIONAL  reduce 52
+	CONC  reduce 52
+	COUNT  reduce 52
+	DIFFERENT  reduce 52
+	DIVIDE  reduce 52
+	DO  reduce 52
+	DOTDOT  reduce 52
+	DROP  reduce 52
+	ELSE  reduce 52
+	EOF  reduce 52
+	FOREACH  reduce 52
+	FUNCTION  reduce 52
+	HCONC  reduce 52
+	ID  reduce 52
+	IF  reduce 52
+	KEEP  reduce 52
+	LARGEST  reduce 52
+	LBRACE  reduce 52
+	LEAST  reduce 52
+	LPAR  reduce 52
+	MAX  reduce 52
+	MAXIMAL  reduce 52
+	MEDIAN  reduce 52
+	MIN  reduce 52
+	MINIMAL  reduce 52
+	MINUS  reduce 52
+	NUM  reduce 52
+	PICK  reduce 52
+	PLUS  reduce 52
+	QUESTION  reduce 52
+	RBRACE  reduce 52
+	REPEAT  reduce 52
+	RPAR  reduce 52
+	SAMPLE  reduce 52
+	SEMI  reduce 52
+	SETMINUS  reduce 52
+	STRINGS  reduce 52
+	SUM  reduce 52
+	THEN  reduce 52
+	TIMES  reduce 52
+	UNTIL  reduce 52
+	VCONCC  reduce 52
+	VCONCL  reduce 52
+	VCONCR  reduce 52
+	WHILE  reduce 52
+
+
+state 124
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp MINUS Exp .  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	DIVIDE  shift 69
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	SAMPLE  shift 84
+	TIMES  shift 86
+	Z  shift 90
+	ACCUM  reduce 31
+	AND  reduce 31
+	CALL  reduce 31
+	CHOOSE  reduce 31
+	COMMA  reduce 31
+	COMPOSITIONAL  reduce 31
+	CONC  reduce 31
+	COUNT  reduce 31
+	DIFFERENT  reduce 31
+	DO  reduce 31
+	DOTDOT  reduce 31
+	DROP  reduce 31
+	ELSE  reduce 31
+	EOF  reduce 31
+	FOREACH  reduce 31
+	FUNCTION  reduce 31
+	HCONC  reduce 31
+	ID  reduce 31
+	IF  reduce 31
+	KEEP  reduce 31
+	LARGEST  reduce 31
+	LBRACE  reduce 31
+	LEAST  reduce 31
+	LPAR  reduce 31
+	MAX  reduce 31
+	MAXIMAL  reduce 31
+	MEDIAN  reduce 31
+	MIN  reduce 31
+	MINIMAL  reduce 31
+	MINUS  reduce 31
+	NUM  reduce 31
+	PICK  reduce 31
+	PLUS  reduce 31
+	QUESTION  reduce 31
+	RBRACE  reduce 31
+	REPEAT  reduce 31
+	RPAR  reduce 31
+	SEMI  reduce 31
+	SETMINUS  reduce 31
+	STRINGS  reduce 31
+	SUM  reduce 31
+	THEN  reduce 31
+	UNTIL  reduce 31
+	VCONCC  reduce 31
+	VCONCL  reduce 31
+	VCONCR  reduce 31
+	WHILE  reduce 31
+
+
+state 125
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp NEQ Exp .  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	Z  shift 90
+	ACCUM  reduce 51
+	AND  reduce 51
+	CALL  reduce 51
+	CHOOSE  reduce 51
+	COMMA  reduce 51
+	COMPOSITIONAL  reduce 51
+	CONC  reduce 51
+	COUNT  reduce 51
+	DIFFERENT  reduce 51
+	DIVIDE  reduce 51
+	DO  reduce 51
+	DOTDOT  reduce 51
+	DROP  reduce 51
+	ELSE  reduce 51
+	EOF  reduce 51
+	FOREACH  reduce 51
+	FUNCTION  reduce 51
+	HCONC  reduce 51
+	ID  reduce 51
+	IF  reduce 51
+	KEEP  reduce 51
+	LARGEST  reduce 51
+	LBRACE  reduce 51
+	LEAST  reduce 51
+	LPAR  reduce 51
+	MAX  reduce 51
+	MAXIMAL  reduce 51
+	MEDIAN  reduce 51
+	MIN  reduce 51
+	MINIMAL  reduce 51
+	MINUS  reduce 51
+	NUM  reduce 51
+	PICK  reduce 51
+	PLUS  reduce 51
+	QUESTION  reduce 51
+	RBRACE  reduce 51
+	REPEAT  reduce 51
+	RPAR  reduce 51
+	SAMPLE  reduce 51
+	SEMI  reduce 51
+	SETMINUS  reduce 51
+	STRINGS  reduce 51
+	SUM  reduce 51
+	THEN  reduce 51
+	TIMES  reduce 51
+	UNTIL  reduce 51
+	VCONCC  reduce 51
+	VCONCL  reduce 51
+	VCONCR  reduce 51
+	WHILE  reduce 51
+
+
+state 126
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp PICK Exp .  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PLUS  shift 83
+	SAMPLE  shift 84
+	TIMES  shift 86
+	Z  shift 90
+	ACCUM  reduce 58
+	CALL  reduce 58
+	CHOOSE  reduce 58
+	COMMA  reduce 58
+	COMPOSITIONAL  reduce 58
+	COUNT  reduce 58
+	DIFFERENT  reduce 58
+	DO  reduce 58
+	DOTDOT  reduce 58
+	DROP  reduce 58
+	ELSE  reduce 58
+	EOF  reduce 58
+	FOREACH  reduce 58
+	FUNCTION  reduce 58
+	HCONC  reduce 58
+	ID  reduce 58
+	IF  reduce 58
+	KEEP  reduce 58
+	LARGEST  reduce 58
+	LBRACE  reduce 58
+	LEAST  reduce 58
+	LPAR  reduce 58
+	MAX  reduce 58
+	MAXIMAL  reduce 58
+	MEDIAN  reduce 58
+	MIN  reduce 58
+	MINIMAL  reduce 58
+	NUM  reduce 58
+	PICK  reduce 58
+	QUESTION  reduce 58
+	RBRACE  reduce 58
+	REPEAT  reduce 58
+	RPAR  reduce 58
+	SEMI  reduce 58
+	SETMINUS  reduce 58
+	STRINGS  reduce 58
+	SUM  reduce 58
+	THEN  reduce 58
+	UNTIL  reduce 58
+	VCONCC  reduce 58
+	VCONCL  reduce 58
+	VCONCR  reduce 58
+	WHILE  reduce 58
+
+
+state 127
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp PLUS Exp .  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	DIVIDE  shift 69
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	SAMPLE  shift 84
+	TIMES  shift 86
+	Z  shift 90
+	ACCUM  reduce 30
+	AND  reduce 30
+	CALL  reduce 30
+	CHOOSE  reduce 30
+	COMMA  reduce 30
+	COMPOSITIONAL  reduce 30
+	CONC  reduce 30
+	COUNT  reduce 30
+	DIFFERENT  reduce 30
+	DO  reduce 30
+	DOTDOT  reduce 30
+	DROP  reduce 30
+	ELSE  reduce 30
+	EOF  reduce 30
+	FOREACH  reduce 30
+	FUNCTION  reduce 30
+	HCONC  reduce 30
+	ID  reduce 30
+	IF  reduce 30
+	KEEP  reduce 30
+	LARGEST  reduce 30
+	LBRACE  reduce 30
+	LEAST  reduce 30
+	LPAR  reduce 30
+	MAX  reduce 30
+	MAXIMAL  reduce 30
+	MEDIAN  reduce 30
+	MIN  reduce 30
+	MINIMAL  reduce 30
+	MINUS  reduce 30
+	NUM  reduce 30
+	PICK  reduce 30
+	PLUS  reduce 30
+	QUESTION  reduce 30
+	RBRACE  reduce 30
+	REPEAT  reduce 30
+	RPAR  reduce 30
+	SEMI  reduce 30
+	SETMINUS  reduce 30
+	STRINGS  reduce 30
+	SUM  reduce 30
+	THEN  reduce 30
+	UNTIL  reduce 30
+	VCONCC  reduce 30
+	VCONCL  reduce 30
+	VCONCR  reduce 30
+	WHILE  reduce 30
+
+
+state 128
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp SAMPLE Exp .  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	HASH  shift 75
+	Z  shift 90
+	ACCUM  reduce 71
+	AND  reduce 71
+	CALL  reduce 71
+	CHOOSE  reduce 71
+	COMMA  reduce 71
+	COMPOSITIONAL  reduce 71
+	CONC  reduce 71
+	COUNT  reduce 71
+	DIFFERENT  reduce 71
+	DIVIDE  reduce 71
+	DO  reduce 71
+	DOTDOT  reduce 71
+	DROP  reduce 71
+	ELSE  reduce 71
+	EOF  reduce 71
+	EQ  reduce 71
+	FOREACH  reduce 71
+	FUNCTION  reduce 71
+	GE  reduce 71
+	GT  reduce 71
+	HCONC  reduce 71
+	ID  reduce 71
+	IF  reduce 71
+	KEEP  reduce 71
+	LARGEST  reduce 71
+	LBRACE  reduce 71
+	LE  reduce 71
+	LEAST  reduce 71
+	LPAR  reduce 71
+	LT  reduce 71
+	MAX  reduce 71
+	MAXIMAL  reduce 71
+	MEDIAN  reduce 71
+	MIN  reduce 71
+	MINIMAL  reduce 71
+	MINUS  reduce 71
+	NEQ  reduce 71
+	NUM  reduce 71
+	PICK  reduce 71
+	PLUS  reduce 71
+	QUESTION  reduce 71
+	RBRACE  reduce 71
+	REPEAT  reduce 71
+	RPAR  reduce 71
+	SAMPLE  reduce 71
+	SEMI  reduce 71
+	SETMINUS  reduce 71
+	STRINGS  reduce 71
+	SUM  reduce 71
+	THEN  reduce 71
+	TIMES  reduce 71
+	UNTIL  reduce 71
+	VCONCC  reduce 71
+	VCONCL  reduce 71
+	VCONCR  reduce 71
+	WHILE  reduce 71
+
+
+state 129
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp SETMINUS Exp .  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PLUS  shift 83
+	SAMPLE  shift 84
+	TIMES  shift 86
+	Z  shift 90
+	ACCUM  reduce 59
+	CALL  reduce 59
+	CHOOSE  reduce 59
+	COMMA  reduce 59
+	COMPOSITIONAL  reduce 59
+	COUNT  reduce 59
+	DIFFERENT  reduce 59
+	DO  reduce 59
+	DOTDOT  reduce 59
+	DROP  reduce 59
+	ELSE  reduce 59
+	EOF  reduce 59
+	FOREACH  reduce 59
+	FUNCTION  reduce 59
+	HCONC  reduce 59
+	ID  reduce 59
+	IF  reduce 59
+	KEEP  reduce 59
+	LARGEST  reduce 59
+	LBRACE  reduce 59
+	LEAST  reduce 59
+	LPAR  reduce 59
+	MAX  reduce 59
+	MAXIMAL  reduce 59
+	MEDIAN  reduce 59
+	MIN  reduce 59
+	MINIMAL  reduce 59
+	NUM  reduce 59
+	PICK  reduce 59
+	QUESTION  reduce 59
+	RBRACE  reduce 59
+	REPEAT  reduce 59
+	RPAR  reduce 59
+	SEMI  reduce 59
+	SETMINUS  reduce 59
+	STRINGS  reduce 59
+	SUM  reduce 59
+	THEN  reduce 59
+	UNTIL  reduce 59
+	VCONCC  reduce 59
+	VCONCL  reduce 59
+	VCONCR  reduce 59
+	WHILE  reduce 59
+
+
+state 130
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp TIMES Exp .  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	SAMPLE  shift 84
+	Z  shift 90
+	ACCUM  reduce 32
+	AND  reduce 32
+	CALL  reduce 32
+	CHOOSE  reduce 32
+	COMMA  reduce 32
+	COMPOSITIONAL  reduce 32
+	CONC  reduce 32
+	COUNT  reduce 32
+	DIFFERENT  reduce 32
+	DIVIDE  reduce 32
+	DO  reduce 32
+	DOTDOT  reduce 32
+	DROP  reduce 32
+	ELSE  reduce 32
+	EOF  reduce 32
+	FOREACH  reduce 32
+	FUNCTION  reduce 32
+	HCONC  reduce 32
+	ID  reduce 32
+	IF  reduce 32
+	KEEP  reduce 32
+	LARGEST  reduce 32
+	LBRACE  reduce 32
+	LEAST  reduce 32
+	LPAR  reduce 32
+	MAX  reduce 32
+	MAXIMAL  reduce 32
+	MEDIAN  reduce 32
+	MIN  reduce 32
+	MINIMAL  reduce 32
+	MINUS  reduce 32
+	NUM  reduce 32
+	PICK  reduce 32
+	PLUS  reduce 32
+	QUESTION  reduce 32
+	RBRACE  reduce 32
+	REPEAT  reduce 32
+	RPAR  reduce 32
+	SEMI  reduce 32
+	SETMINUS  reduce 32
+	STRINGS  reduce 32
+	SUM  reduce 32
+	THEN  reduce 32
+	TIMES  reduce 32
+	UNTIL  reduce 32
+	VCONCC  reduce 32
+	VCONCL  reduce 32
+	VCONCR  reduce 32
+	WHILE  reduce 32
+
+
+state 131
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+	Exp : Exp VCONCC Exp .  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 75
+	CALL  reduce 75
+	CHOOSE  reduce 75
+	COMMA  reduce 75
+	COMPOSITIONAL  reduce 75
+	COUNT  reduce 75
+	DIFFERENT  reduce 75
+	DO  reduce 75
+	ELSE  reduce 75
+	EOF  reduce 75
+	FOREACH  reduce 75
+	FUNCTION  reduce 75
+	ID  reduce 75
+	IF  reduce 75
+	LARGEST  reduce 75
+	LBRACE  reduce 75
+	LEAST  reduce 75
+	LPAR  reduce 75
+	MAX  reduce 75
+	MAXIMAL  reduce 75
+	MEDIAN  reduce 75
+	MIN  reduce 75
+	MINIMAL  reduce 75
+	NUM  reduce 75
+	QUESTION  reduce 75
+	RBRACE  reduce 75
+	REPEAT  reduce 75
+	RPAR  reduce 75
+	SEMI  reduce 75
+	STRINGS  reduce 75
+	SUM  reduce 75
+	THEN  reduce 75
+	UNTIL  reduce 75
+	WHILE  reduce 75
+
+
+state 132
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp VCONCL Exp .  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 73
+	CALL  reduce 73
+	CHOOSE  reduce 73
+	COMMA  reduce 73
+	COMPOSITIONAL  reduce 73
+	COUNT  reduce 73
+	DIFFERENT  reduce 73
+	DO  reduce 73
+	ELSE  reduce 73
+	EOF  reduce 73
+	FOREACH  reduce 73
+	FUNCTION  reduce 73
+	ID  reduce 73
+	IF  reduce 73
+	LARGEST  reduce 73
+	LBRACE  reduce 73
+	LEAST  reduce 73
+	LPAR  reduce 73
+	MAX  reduce 73
+	MAXIMAL  reduce 73
+	MEDIAN  reduce 73
+	MIN  reduce 73
+	MINIMAL  reduce 73
+	NUM  reduce 73
+	QUESTION  reduce 73
+	RBRACE  reduce 73
+	REPEAT  reduce 73
+	RPAR  reduce 73
+	SEMI  reduce 73
+	STRINGS  reduce 73
+	SUM  reduce 73
+	THEN  reduce 73
+	UNTIL  reduce 73
+	WHILE  reduce 73
+
+
+state 133
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp VCONCR Exp .  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 74
+	CALL  reduce 74
+	CHOOSE  reduce 74
+	COMMA  reduce 74
+	COMPOSITIONAL  reduce 74
+	COUNT  reduce 74
+	DIFFERENT  reduce 74
+	DO  reduce 74
+	ELSE  reduce 74
+	EOF  reduce 74
+	FOREACH  reduce 74
+	FUNCTION  reduce 74
+	ID  reduce 74
+	IF  reduce 74
+	LARGEST  reduce 74
+	LBRACE  reduce 74
+	LEAST  reduce 74
+	LPAR  reduce 74
+	MAX  reduce 74
+	MAXIMAL  reduce 74
+	MEDIAN  reduce 74
+	MIN  reduce 74
+	MINIMAL  reduce 74
+	NUM  reduce 74
+	QUESTION  reduce 74
+	RBRACE  reduce 74
+	REPEAT  reduce 74
+	RPAR  reduce 74
+	SEMI  reduce 74
+	STRINGS  reduce 74
+	SUM  reduce 74
+	THEN  reduce 74
+	UNTIL  reduce 74
+	WHILE  reduce 74
+
+
+state 134
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp Z Exp .  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	HASH  shift 75
+	Z  shift 90
+	ACCUM  reduce 49
+	AND  reduce 49
+	CALL  reduce 49
+	CHOOSE  reduce 49
+	COMMA  reduce 49
+	COMPOSITIONAL  reduce 49
+	CONC  reduce 49
+	COUNT  reduce 49
+	DIFFERENT  reduce 49
+	DIVIDE  reduce 49
+	DO  reduce 49
+	DOTDOT  reduce 49
+	DROP  reduce 49
+	ELSE  reduce 49
+	EOF  reduce 49
+	EQ  reduce 49
+	FOREACH  reduce 49
+	FUNCTION  reduce 49
+	GE  reduce 49
+	GT  reduce 49
+	HCONC  reduce 49
+	ID  reduce 49
+	IF  reduce 49
+	KEEP  reduce 49
+	LARGEST  reduce 49
+	LBRACE  reduce 49
+	LE  reduce 49
+	LEAST  reduce 49
+	LPAR  reduce 49
+	LT  reduce 49
+	MAX  reduce 49
+	MAXIMAL  reduce 49
+	MEDIAN  reduce 49
+	MIN  reduce 49
+	MINIMAL  reduce 49
+	MINUS  reduce 49
+	NEQ  reduce 49
+	NUM  reduce 49
+	PICK  reduce 49
+	PLUS  reduce 49
+	QUESTION  reduce 49
+	RBRACE  reduce 49
+	REPEAT  reduce 49
+	RPAR  reduce 49
+	SAMPLE  reduce 49
+	SEMI  reduce 49
+	SETMINUS  reduce 49
+	STRINGS  reduce 49
+	SUM  reduce 49
+	THEN  reduce 49
+	TIMES  reduce 49
+	UNTIL  reduce 49
+	VCONCC  reduce 49
+	VCONCL  reduce 49
+	VCONCR  reduce 49
+	WHILE  reduce 49
+
+
+state 135
+	Dice : Decls Exp Decls EOF .  (1)
+
+	.  reduce 1
+
+
+state 136
+	Decl : COMPOSITIONAL ID LPAR Exp COMMA . IDorUnop COMMA IDorBinop RPAR  (5)
+
+	CHOOSE  shift 151
+	COUNT  shift 152
+	D  shift 153
+	DIFFERENT  shift 154
+	ID  shift 155
+	MAX  shift 156
+	MAXIMAL  shift 157
+	MIN  shift 158
+	MINIMAL  shift 159
+	MINUS  shift 160
+	SUM  shift 161
+	Z  shift 162
+	.  error
+
+	IDorUnop  goto 163
+
+
+state 137
+	Ids : ID COMMA . Ids  (23)
+
+	ID  shift 93
+	.  error
+
+	Ids  goto 164
+
+
+state 138
+	Decl : FUNCTION ID LPAR Ids RPAR . EQ Exp  (4)
+
+	EQ  shift 165
+	.  error
+
+
+state 139
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : ACCUM ID ASSGN Exp . WHILE Exp  (62)
+	Exp : ACCUM ID ASSGN Exp . UNTIL Exp  (63)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	UNTIL  shift 166
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	WHILE  shift 167
+	Z  shift 90
+	.  error
+
+
+state 140
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+	ExpList2 : Exp .  (82)
+	ExpList2 : Exp . COMMA ExpList2  (83)
+
+	AND  shift 66
+	COMMA  shift 168
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	RPAR  reduce 82
+
+
+state 141
+	Exp : CALL ID LPAR ExpList2 . RPAR  (68)
+
+	RPAR  shift 169
+	.  error
+
+
+state 142
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : FOREACH ID IN Exp . DO Exp  (66)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DO  shift 170
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	.  error
+
+
+state 143
+	Exp : ID ASSGN Exp SEMI . Exp  (61)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 171
+
+
+state 144
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : IF Exp THEN Exp . ELSE Exp  (67)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	ELSE  shift 172
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	.  error
+
+
+state 145
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : D Exp .  (35)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp D Exp .  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	ACCUM  reduce 35
+	AND  reduce 35
+	CALL  reduce 35
+	CHOOSE  reduce 35
+	COMMA  reduce 35
+	COMPOSITIONAL  reduce 35
+	CONC  reduce 35
+	COUNT  reduce 35
+	D  reduce 35
+	DIFFERENT  reduce 35
+	DIVIDE  reduce 35
+	DO  reduce 35
+	DOTDOT  reduce 35
+	DROP  reduce 35
+	ELSE  reduce 35
+	EOF  reduce 35
+	EQ  reduce 35
+	FOREACH  reduce 35
+	FUNCTION  reduce 35
+	GE  reduce 35
+	GT  reduce 35
+	HASH  reduce 35
+	HCONC  reduce 35
+	ID  reduce 35
+	IF  reduce 35
+	KEEP  reduce 35
+	LARGEST  reduce 35
+	LBRACE  reduce 35
+	LE  reduce 35
+	LEAST  reduce 35
+	LPAR  reduce 35
+	LT  reduce 35
+	MAX  reduce 35
+	MAXIMAL  reduce 35
+	MEDIAN  reduce 35
+	MIN  reduce 35
+	MINIMAL  reduce 35
+	MINUS  reduce 35
+	NEQ  reduce 35
+	NUM  reduce 35
+	PICK  reduce 35
+	PLUS  reduce 35
+	QUESTION  reduce 35
+	RBRACE  reduce 35
+	REPEAT  reduce 35
+	RPAR  reduce 35
+	SAMPLE  reduce 35
+	SEMI  reduce 35
+	SETMINUS  reduce 35
+	STRINGS  reduce 35
+	SUM  reduce 35
+	THEN  reduce 35
+	TIMES  reduce 35
+	UNTIL  reduce 35
+	VCONCC  reduce 35
+	VCONCL  reduce 35
+	VCONCR  reduce 35
+	WHILE  reduce 35
+	Z  reduce 35
+
+
+state 146
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp MINUS Exp .  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : MINUS Exp .  (34)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	SAMPLE  shift 84
+	Z  shift 90
+	ACCUM  reduce 34
+	AND  reduce 34
+	CALL  reduce 34
+	CHOOSE  reduce 34
+	COMMA  reduce 34
+	COMPOSITIONAL  reduce 34
+	CONC  reduce 34
+	COUNT  reduce 34
+	DIFFERENT  reduce 34
+	DIVIDE  reduce 34
+	DO  reduce 34
+	DOTDOT  reduce 34
+	DROP  reduce 34
+	ELSE  reduce 34
+	EOF  reduce 34
+	FOREACH  reduce 34
+	FUNCTION  reduce 34
+	HCONC  reduce 34
+	ID  reduce 34
+	IF  reduce 34
+	KEEP  reduce 34
+	LARGEST  reduce 34
+	LBRACE  reduce 34
+	LEAST  reduce 34
+	LPAR  reduce 34
+	MAX  reduce 34
+	MAXIMAL  reduce 34
+	MEDIAN  reduce 34
+	MIN  reduce 34
+	MINIMAL  reduce 34
+	MINUS  reduce 34
+	NUM  reduce 34
+	PICK  reduce 34
+	PLUS  reduce 34
+	QUESTION  reduce 34
+	RBRACE  reduce 34
+	REPEAT  reduce 34
+	RPAR  reduce 34
+	SEMI  reduce 34
+	SETMINUS  reduce 34
+	STRINGS  reduce 34
+	SUM  reduce 34
+	THEN  reduce 34
+	TIMES  reduce 34
+	UNTIL  reduce 34
+	VCONCC  reduce 34
+	VCONCL  reduce 34
+	VCONCR  reduce 34
+	WHILE  reduce 34
+
+
+state 147
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : SAMPLE Exp .  (70)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp SAMPLE Exp .  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	D  shift 68
+	HASH  shift 75
+	Z  shift 90
+	ACCUM  reduce 71
+	AND  reduce 71
+	CALL  reduce 71
+	CHOOSE  reduce 71
+	COMMA  reduce 70
+	COMPOSITIONAL  reduce 70
+	CONC  reduce 71
+	COUNT  reduce 71
+	DIFFERENT  reduce 71
+	DIVIDE  reduce 71
+	DO  reduce 70
+	DOTDOT  reduce 71
+	DROP  reduce 71
+	ELSE  reduce 70
+	EOF  reduce 70
+	EQ  reduce 71
+	FOREACH  reduce 71
+	FUNCTION  reduce 70
+	GE  reduce 71
+	GT  reduce 71
+	HCONC  reduce 71
+	ID  reduce 71
+	IF  reduce 71
+	KEEP  reduce 71
+	LARGEST  reduce 71
+	LBRACE  reduce 71
+	LE  reduce 71
+	LEAST  reduce 71
+	LPAR  reduce 71
+	LT  reduce 71
+	MAX  reduce 71
+	MAXIMAL  reduce 71
+	MEDIAN  reduce 71
+	MIN  reduce 71
+	MINIMAL  reduce 71
+	MINUS  reduce 71
+	NEQ  reduce 71
+	NUM  reduce 71
+	PICK  reduce 71
+	PLUS  reduce 71
+	QUESTION  reduce 71
+	RBRACE  reduce 70
+	REPEAT  reduce 71
+	RPAR  reduce 70
+	SAMPLE  reduce 71
+	SEMI  reduce 70
+	SETMINUS  reduce 71
+	STRINGS  reduce 71
+	SUM  reduce 71
+	THEN  reduce 70
+	TIMES  reduce 71
+	UNTIL  reduce 70
+	VCONCC  reduce 71
+	VCONCL  reduce 71
+	VCONCR  reduce 71
+	WHILE  reduce 70
+
+
+state 148
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Z Exp .  (36)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp Z Exp .  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	ACCUM  reduce 36
+	AND  reduce 36
+	CALL  reduce 36
+	CHOOSE  reduce 36
+	COMMA  reduce 36
+	COMPOSITIONAL  reduce 36
+	CONC  reduce 36
+	COUNT  reduce 36
+	D  reduce 36
+	DIFFERENT  reduce 36
+	DIVIDE  reduce 36
+	DO  reduce 36
+	DOTDOT  reduce 36
+	DROP  reduce 36
+	ELSE  reduce 36
+	EOF  reduce 36
+	EQ  reduce 36
+	FOREACH  reduce 36
+	FUNCTION  reduce 36
+	GE  reduce 36
+	GT  reduce 36
+	HASH  reduce 36
+	HCONC  reduce 36
+	ID  reduce 36
+	IF  reduce 36
+	KEEP  reduce 36
+	LARGEST  reduce 36
+	LBRACE  reduce 36
+	LE  reduce 36
+	LEAST  reduce 36
+	LPAR  reduce 36
+	LT  reduce 36
+	MAX  reduce 36
+	MAXIMAL  reduce 36
+	MEDIAN  reduce 36
+	MIN  reduce 36
+	MINIMAL  reduce 36
+	MINUS  reduce 36
+	NEQ  reduce 36
+	NUM  reduce 36
+	PICK  reduce 36
+	PLUS  reduce 36
+	QUESTION  reduce 36
+	RBRACE  reduce 36
+	REPEAT  reduce 36
+	RPAR  reduce 36
+	SAMPLE  reduce 36
+	SEMI  reduce 36
+	SETMINUS  reduce 36
+	STRINGS  reduce 36
+	SUM  reduce 36
+	THEN  reduce 36
+	TIMES  reduce 36
+	UNTIL  reduce 36
+	VCONCC  reduce 36
+	VCONCL  reduce 36
+	VCONCR  reduce 36
+	WHILE  reduce 36
+	Z  reduce 36
+
+
+state 149
+	ExpList1 : Exp COMMA ExpList1 .  (81)
+
+	.  reduce 81
+
+
+state 150
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : REPEAT ID ASSGN Exp . WHILE Exp  (64)
+	Exp : REPEAT ID ASSGN Exp . UNTIL Exp  (65)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	UNTIL  shift 173
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	WHILE  shift 174
+	Z  shift 90
+	.  error
+
+
+state 151
+	IDorUnop : CHOOSE .  (16)
+
+	.  reduce 16
+
+
+state 152
+	IDorUnop : COUNT .  (11)
+
+	.  reduce 11
+
+
+state 153
+	IDorUnop : D .  (8)
+
+	.  reduce 8
+
+
+state 154
+	IDorUnop : DIFFERENT .  (17)
+
+	.  reduce 17
+
+
+state 155
+	IDorUnop : ID .  (6)
+
+	.  reduce 6
+
+
+state 156
+	IDorUnop : MAX .  (13)
+
+	.  reduce 13
+
+
+state 157
+	IDorUnop : MAXIMAL .  (15)
+
+	.  reduce 15
+
+
+state 158
+	IDorUnop : MIN .  (12)
+
+	.  reduce 12
+
+
+state 159
+	IDorUnop : MINIMAL .  (14)
+
+	.  reduce 14
+
+
+state 160
+	IDorUnop : MINUS .  (7)
+
+	.  reduce 7
+
+
+state 161
+	IDorUnop : SUM .  (10)
+
+	.  reduce 10
+
+
+state 162
+	IDorUnop : Z .  (9)
+
+	.  reduce 9
+
+
+state 163
+	Decl : COMPOSITIONAL ID LPAR Exp COMMA IDorUnop . COMMA IDorBinop RPAR  (5)
+
+	COMMA  shift 175
+	.  error
+
+
+state 164
+	Ids : ID COMMA Ids .  (23)
+
+	.  reduce 23
+
+
+state 165
+	Decl : FUNCTION ID LPAR Ids RPAR EQ . Exp  (4)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 176
+
+
+state 166
+	Exp : ACCUM ID ASSGN Exp UNTIL . Exp  (63)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 177
+
+
+state 167
+	Exp : ACCUM ID ASSGN Exp WHILE . Exp  (62)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 178
+
+
+state 168
+	ExpList2 : Exp COMMA . ExpList2  (83)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 140
+	ExpList2  goto 179
+
+
+state 169
+	Exp : CALL ID LPAR ExpList2 RPAR .  (68)
+
+	.  reduce 68
+
+
+state 170
+	Exp : FOREACH ID IN Exp DO . Exp  (66)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 180
+
+
+state 171
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : ID ASSGN Exp SEMI Exp .  (61)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 61
+	CALL  reduce 61
+	CHOOSE  reduce 61
+	COMMA  reduce 61
+	COMPOSITIONAL  reduce 61
+	COUNT  reduce 61
+	DIFFERENT  reduce 61
+	DO  reduce 61
+	ELSE  reduce 61
+	EOF  reduce 61
+	FOREACH  reduce 61
+	FUNCTION  reduce 61
+	ID  reduce 61
+	IF  reduce 61
+	LARGEST  reduce 61
+	LBRACE  reduce 61
+	LEAST  reduce 61
+	LPAR  reduce 61
+	MAX  reduce 61
+	MAXIMAL  reduce 61
+	MEDIAN  reduce 61
+	MIN  reduce 61
+	MINIMAL  reduce 61
+	NUM  reduce 61
+	QUESTION  reduce 61
+	RBRACE  reduce 61
+	REPEAT  reduce 61
+	RPAR  reduce 61
+	SEMI  reduce 61
+	STRINGS  reduce 61
+	SUM  reduce 61
+	THEN  reduce 61
+	UNTIL  reduce 61
+	WHILE  reduce 61
+
+
+state 172
+	Exp : IF Exp THEN Exp ELSE . Exp  (67)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 181
+
+
+state 173
+	Exp : REPEAT ID ASSGN Exp UNTIL . Exp  (65)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 182
+
+
+state 174
+	Exp : REPEAT ID ASSGN Exp WHILE . Exp  (64)
+
+	ACCUM  shift 11
+	CALL  shift 12
+	CHOOSE  shift 13
+	COUNT  shift 14
+	D  shift 15
+	DIFFERENT  shift 16
+	FOREACH  shift 17
+	ID  shift 18
+	IF  shift 19
+	LARGEST  shift 20
+	LBRACE  shift 21
+	LEAST  shift 22
+	LPAR  shift 23
+	MAX  shift 24
+	MAXIMAL  shift 25
+	MEDIAN  shift 26
+	MIN  shift 27
+	MINIMAL  shift 28
+	MINUS  shift 29
+	NUM  shift 30
+	QUESTION  shift 31
+	REPEAT  shift 32
+	SAMPLE  shift 33
+	STRINGS  shift 34
+	SUM  shift 35
+	Z  shift 36
+	.  error
+
+	Exp  goto 183
+
+
+state 175
+	Decl : COMPOSITIONAL ID LPAR Exp COMMA IDorUnop COMMA . IDorBinop RPAR  (5)
+
+	CONC  shift 184
+	ID  shift 185
+	PLUS  shift 186
+	TIMES  shift 187
+	.  error
+
+	IDorBinop  goto 188
+
+
+state 176
+	Decl : FUNCTION ID LPAR Ids RPAR EQ Exp .  (4)
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 4
+	CALL  reduce 4
+	CHOOSE  reduce 4
+	COMPOSITIONAL  reduce 4
+	COUNT  reduce 4
+	DIFFERENT  reduce 4
+	EOF  reduce 4
+	FOREACH  reduce 4
+	FUNCTION  reduce 4
+	ID  reduce 4
+	IF  reduce 4
+	LARGEST  reduce 4
+	LBRACE  reduce 4
+	LEAST  reduce 4
+	LPAR  reduce 4
+	MAX  reduce 4
+	MAXIMAL  reduce 4
+	MEDIAN  reduce 4
+	MIN  reduce 4
+	MINIMAL  reduce 4
+	MINUS  reduce 4
+	NUM  reduce 4
+	QUESTION  reduce 4
+	REPEAT  reduce 4
+	SAMPLE  reduce 4
+	STRINGS  reduce 4
+	SUM  reduce 4
+
+
+state 177
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : ACCUM ID ASSGN Exp UNTIL Exp .  (63)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 63
+	CALL  reduce 63
+	CHOOSE  reduce 63
+	COMMA  reduce 63
+	COMPOSITIONAL  reduce 63
+	COUNT  reduce 63
+	DIFFERENT  reduce 63
+	DO  reduce 63
+	ELSE  reduce 63
+	EOF  reduce 63
+	FOREACH  reduce 63
+	FUNCTION  reduce 63
+	ID  reduce 63
+	IF  reduce 63
+	LARGEST  reduce 63
+	LBRACE  reduce 63
+	LEAST  reduce 63
+	LPAR  reduce 63
+	MAX  reduce 63
+	MAXIMAL  reduce 63
+	MEDIAN  reduce 63
+	MIN  reduce 63
+	MINIMAL  reduce 63
+	NUM  reduce 63
+	QUESTION  reduce 63
+	RBRACE  reduce 63
+	REPEAT  reduce 63
+	RPAR  reduce 63
+	SEMI  reduce 63
+	STRINGS  reduce 63
+	SUM  reduce 63
+	THEN  reduce 63
+	UNTIL  reduce 63
+	WHILE  reduce 63
+
+
+state 178
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : ACCUM ID ASSGN Exp WHILE Exp .  (62)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 62
+	CALL  reduce 62
+	CHOOSE  reduce 62
+	COMMA  reduce 62
+	COMPOSITIONAL  reduce 62
+	COUNT  reduce 62
+	DIFFERENT  reduce 62
+	DO  reduce 62
+	ELSE  reduce 62
+	EOF  reduce 62
+	FOREACH  reduce 62
+	FUNCTION  reduce 62
+	ID  reduce 62
+	IF  reduce 62
+	LARGEST  reduce 62
+	LBRACE  reduce 62
+	LEAST  reduce 62
+	LPAR  reduce 62
+	MAX  reduce 62
+	MAXIMAL  reduce 62
+	MEDIAN  reduce 62
+	MIN  reduce 62
+	MINIMAL  reduce 62
+	NUM  reduce 62
+	QUESTION  reduce 62
+	RBRACE  reduce 62
+	REPEAT  reduce 62
+	RPAR  reduce 62
+	SEMI  reduce 62
+	STRINGS  reduce 62
+	SUM  reduce 62
+	THEN  reduce 62
+	UNTIL  reduce 62
+	WHILE  reduce 62
+
+
+state 179
+	ExpList2 : Exp COMMA ExpList2 .  (83)
+
+	.  reduce 83
+
+
+state 180
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : FOREACH ID IN Exp DO Exp .  (66)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 66
+	CALL  reduce 66
+	CHOOSE  reduce 66
+	COMMA  reduce 66
+	COMPOSITIONAL  reduce 66
+	COUNT  reduce 66
+	DIFFERENT  reduce 66
+	DO  reduce 66
+	ELSE  reduce 66
+	EOF  reduce 66
+	FOREACH  reduce 66
+	FUNCTION  reduce 66
+	ID  reduce 66
+	IF  reduce 66
+	LARGEST  reduce 66
+	LBRACE  reduce 66
+	LEAST  reduce 66
+	LPAR  reduce 66
+	MAX  reduce 66
+	MAXIMAL  reduce 66
+	MEDIAN  reduce 66
+	MIN  reduce 66
+	MINIMAL  reduce 66
+	NUM  reduce 66
+	QUESTION  reduce 66
+	RBRACE  reduce 66
+	REPEAT  reduce 66
+	RPAR  reduce 66
+	SEMI  reduce 66
+	STRINGS  reduce 66
+	SUM  reduce 66
+	THEN  reduce 66
+	UNTIL  reduce 66
+	WHILE  reduce 66
+
+
+state 181
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : IF Exp THEN Exp ELSE Exp .  (67)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 67
+	CALL  reduce 67
+	CHOOSE  reduce 67
+	COMMA  reduce 67
+	COMPOSITIONAL  reduce 67
+	COUNT  reduce 67
+	DIFFERENT  reduce 67
+	DO  reduce 67
+	ELSE  reduce 67
+	EOF  reduce 67
+	FOREACH  reduce 67
+	FUNCTION  reduce 67
+	ID  reduce 67
+	IF  reduce 67
+	LARGEST  reduce 67
+	LBRACE  reduce 67
+	LEAST  reduce 67
+	LPAR  reduce 67
+	MAX  reduce 67
+	MAXIMAL  reduce 67
+	MEDIAN  reduce 67
+	MIN  reduce 67
+	MINIMAL  reduce 67
+	NUM  reduce 67
+	QUESTION  reduce 67
+	RBRACE  reduce 67
+	REPEAT  reduce 67
+	RPAR  reduce 67
+	SEMI  reduce 67
+	STRINGS  reduce 67
+	SUM  reduce 67
+	THEN  reduce 67
+	UNTIL  reduce 67
+	WHILE  reduce 67
+
+
+state 182
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : REPEAT ID ASSGN Exp UNTIL Exp .  (65)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 65
+	CALL  reduce 65
+	CHOOSE  reduce 65
+	COMMA  reduce 65
+	COMPOSITIONAL  reduce 65
+	COUNT  reduce 65
+	DIFFERENT  reduce 65
+	DO  reduce 65
+	ELSE  reduce 65
+	EOF  reduce 65
+	FOREACH  reduce 65
+	FUNCTION  reduce 65
+	ID  reduce 65
+	IF  reduce 65
+	LARGEST  reduce 65
+	LBRACE  reduce 65
+	LEAST  reduce 65
+	LPAR  reduce 65
+	MAX  reduce 65
+	MAXIMAL  reduce 65
+	MEDIAN  reduce 65
+	MIN  reduce 65
+	MINIMAL  reduce 65
+	NUM  reduce 65
+	QUESTION  reduce 65
+	RBRACE  reduce 65
+	REPEAT  reduce 65
+	RPAR  reduce 65
+	SEMI  reduce 65
+	STRINGS  reduce 65
+	SUM  reduce 65
+	THEN  reduce 65
+	UNTIL  reduce 65
+	WHILE  reduce 65
+
+
+state 183
+	Exp : Exp . CONC Exp  (26)
+	Exp : Exp . PLUS Exp  (30)
+	Exp : Exp . MINUS Exp  (31)
+	Exp : Exp . TIMES Exp  (32)
+	Exp : Exp . DIVIDE Exp  (33)
+	Exp : Exp . HASH Exp  (46)
+	Exp : Exp . AND Exp  (47)
+	Exp : Exp . D Exp  (48)
+	Exp : Exp . Z Exp  (49)
+	Exp : Exp . EQ Exp  (50)
+	Exp : Exp . NEQ Exp  (51)
+	Exp : Exp . LT Exp  (52)
+	Exp : Exp . GT Exp  (53)
+	Exp : Exp . LE Exp  (54)
+	Exp : Exp . GE Exp  (55)
+	Exp : Exp . DROP Exp  (56)
+	Exp : Exp . KEEP Exp  (57)
+	Exp : Exp . PICK Exp  (58)
+	Exp : Exp . SETMINUS Exp  (59)
+	Exp : Exp . DOTDOT Exp  (60)
+	Exp : REPEAT ID ASSGN Exp WHILE Exp .  (64)
+	Exp : Exp . SAMPLE Exp  (71)
+	Exp : Exp . HCONC Exp  (72)
+	Exp : Exp . VCONCL Exp  (73)
+	Exp : Exp . VCONCR Exp  (74)
+	Exp : Exp . VCONCC Exp  (75)
+
+	AND  shift 66
+	CONC  shift 67
+	D  shift 68
+	DIVIDE  shift 69
+	DOTDOT  shift 70
+	DROP  shift 71
+	EQ  shift 72
+	GE  shift 73
+	GT  shift 74
+	HASH  shift 75
+	HCONC  shift 76
+	KEEP  shift 77
+	LE  shift 78
+	LT  shift 79
+	MINUS  shift 80
+	NEQ  shift 81
+	PICK  shift 82
+	PLUS  shift 83
+	SAMPLE  shift 84
+	SETMINUS  shift 85
+	TIMES  shift 86
+	VCONCC  shift 87
+	VCONCL  shift 88
+	VCONCR  shift 89
+	Z  shift 90
+	ACCUM  reduce 64
+	CALL  reduce 64
+	CHOOSE  reduce 64
+	COMMA  reduce 64
+	COMPOSITIONAL  reduce 64
+	COUNT  reduce 64
+	DIFFERENT  reduce 64
+	DO  reduce 64
+	ELSE  reduce 64
+	EOF  reduce 64
+	FOREACH  reduce 64
+	FUNCTION  reduce 64
+	ID  reduce 64
+	IF  reduce 64
+	LARGEST  reduce 64
+	LBRACE  reduce 64
+	LEAST  reduce 64
+	LPAR  reduce 64
+	MAX  reduce 64
+	MAXIMAL  reduce 64
+	MEDIAN  reduce 64
+	MIN  reduce 64
+	MINIMAL  reduce 64
+	NUM  reduce 64
+	QUESTION  reduce 64
+	RBRACE  reduce 64
+	REPEAT  reduce 64
+	RPAR  reduce 64
+	SEMI  reduce 64
+	STRINGS  reduce 64
+	SUM  reduce 64
+	THEN  reduce 64
+	UNTIL  reduce 64
+	WHILE  reduce 64
+
+
+state 184
+	IDorBinop : CONC .  (21)
+
+	.  reduce 21
+
+
+state 185
+	IDorBinop : ID .  (18)
+
+	.  reduce 18
+
+
+state 186
+	IDorBinop : PLUS .  (19)
+
+	.  reduce 19
+
+
+state 187
+	IDorBinop : TIMES .  (20)
+
+	.  reduce 20
+
+
+state 188
+	Decl : COMPOSITIONAL ID LPAR Exp COMMA IDorUnop COMMA IDorBinop . RPAR  (5)
+
+	RPAR  shift 189
+	.  error
+
+
+state 189
+	Decl : COMPOSITIONAL ID LPAR Exp COMMA IDorUnop COMMA IDorBinop RPAR .  (5)
+
+	.  reduce 5
+
+
+67 terminals, 12 nonterminals
+85 grammar rules, 190 states

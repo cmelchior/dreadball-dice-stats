@@ -1,0 +1,55 @@
+body {
+  padding: 1em;
+  font-family: verdana;
+  font-size: 0.8em; }
+
+table {
+  border: 0.2em solid #333333;
+  margin: 0.5em;
+  float: left;
+  border-spacing: 0px;
+  border-collapse: collapse; }
+
+th {
+  border: 0.2em solid #333333;
+  background-color: white; }
+
+th span {
+  display: block;
+  margin: 1em; }
+
+td {
+  border: 0.2em solid #333333;
+  padding: 0px; }
+
+td:first-child {
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle; }
+
+.stats {
+  text-align: center;
+  border: none; }
+
+.top p {
+  border-bottom: 1px solid #333333;
+  line-height: 3em;
+  width: 65px;
+  padding: 0px;
+  margin: 0px;
+  background-color: #aaaaaa; }
+
+.middle p {
+  border-bottom: 1px solid #333333;
+  line-height: 3em;
+  width: 65px;
+  padding: 0px;
+  margin: 0px;
+  background-color: #cccccc; }
+
+.bottom p {
+  line-height: 3em;
+  width: 65px;
+  padding: 0px;
+  margin: 0px;
+  background-color: #eeeeee; }

@@ -1,0 +1,76 @@
+// Variabels
+$tableColor: #333333;
+
+
+@mixin tableBorder {
+  border: 0.2em solid $tableColor;
+}
+
+body {
+  padding: 1em;
+  font-family: verdana;
+  font-size: 0.8em;
+}
+
+table {
+  @include tableBorder;
+  margin: 0.5em;
+  float: left;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+
+th {
+  @include tableBorder;
+  background-color: white;
+}
+
+th span {
+  display: block;
+  margin: 1em;
+}
+
+td {
+  @include tableBorder;
+  padding: 0px;
+}
+
+td:first-child {
+  font-weight: bold;
+  text-align:  center;
+  vertical-align: middle;
+}
+
+// Stats
+@mixin statsBorder {
+  border-bottom: 1px solid $tableColor;
+}
+
+@mixin statsPadding {
+  line-height: 3em;
+  width: 65px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.stats {
+  text-align: center;
+  border: none;
+}
+
+.top p {
+  @include statsBorder;
+  @include statsPadding;
+  background-color: #aaaaaa;
+}
+
+.middle p {
+  @include statsBorder;
+  @include statsPadding;
+  background-color: #cccccc;
+}
+
+.bottom p {
+  @include statsPadding;
+  background-color: #eeeeee;
+}
