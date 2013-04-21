@@ -8,15 +8,16 @@ The HTML page is generated using the dice calculator Troll by and Node.js
 
 Usage 
 -----
-Just open the page /output/index.html to see already calculated statistics
+Just open the page /output/index.html to see already calculated statistics.
+Precompiled statistics can also be seen from the two files *dreadball_successes.pdf*
+and *dreadball_opposed.pdf*.
 
 
 Compile new statistics
 -----
 Run the following command from the main dir
-```
-	> nodejs compile_stats.js	
-```
+	
+	> nodejs compile_stats.js
 
 
 Usage requirements

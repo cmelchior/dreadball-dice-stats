@@ -2,14 +2,27 @@
 $tableColor: #333333;
 
 
-@mixin tableBorder {
-  border: 0.2em solid $tableColor;
-}
-
 body {
   padding: 1em;
   font-family: verdana;
-  font-size: 0.8em;
+  font-size: 10px;
+}
+
+h1 {
+  margin: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  clear: both;
+}
+
+h1:first-child {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+
+@mixin tableBorder {
+  border: 0.2em solid $tableColor;
 }
 
 table {
@@ -18,28 +31,135 @@ table {
   float: left;
   border-spacing: 0px;
   border-collapse: collapse;
+
+  @media print {
+    margin: 0.2em;
+  }
 }
 
-th {
-  @include tableBorder;
-  background-color: white;
+tr:nth-child(2) {
+  background-color: #A0A0A0;
 }
 
-th span {
-  display: block;
-  margin: 1em;
+tr:nth-child(3) {
+  background-color: #A8A8A8;
 }
 
-td {
-  @include tableBorder;
-  padding: 0px;
+tr:nth-child(4) {
+  background-color: #B0B0B0;
 }
 
-td:first-child {
-  font-weight: bold;
-  text-align:  center;
-  vertical-align: middle;
+tr:nth-child(5) {
+  background-color: #B8B8B8;
 }
+
+tr:nth-child(6) {
+  background-color: #C0C0C0;
+}
+
+tr:nth-child(7) {
+  background-color: #C8C8C8;
+}
+
+tr:nth-child(8) {
+  background-color: #D0D0D0;
+}
+
+tr:nth-child(9) {
+  background-color: #D8D8D8;
+}
+
+tr:nth-child(10) {
+  background-color: #E0E0E0;
+}
+
+tr:nth-child(11) {
+  background-color: #E8E8E8;
+}
+
+tr:nth-child(12) {
+  background-color: #F0F0F0;
+}
+
+tr:nth-child(13) {
+  background-color: #F8F8F8;
+}
+
+D#successes {
+
+  table {
+    float: left;
+  }
+
+  th {
+    @include tableBorder;
+    padding: 1em;
+  }
+
+  td:first-child {
+    background-color: white;
+    font-weight: bold;
+    vertical-align: middle;
+    width: 35px;
+  }
+
+  td {
+    @include tableBorder;
+    padding: 1em;
+    text-align: center;
+    width: 30px;
+
+    @media print {
+      width: 30gpx;
+    }
+  }
+
+}
+
+#opposed_rolls {
+
+  .section:first-child {
+    display: none;
+    width: 100%;
+    page-break-before: avoid !important;
+  }
+
+  .section:nth-child(2) {
+    page-break-before: avoid !important;
+  }
+
+  .section {
+    page-break-before: always;
+    clear: both;
+  }
+
+  th {
+    @include tableBorder;
+    background-color: white;
+  }
+
+  th span {
+    display: block;
+    margin: 1em;
+
+    @media print {
+      margin: 0.5em;
+    }
+  }
+
+  td {
+    @include tableBorder;
+    padding: 0px;
+  }
+
+  td:first-child {
+    background-color: white;
+    font-weight: bold;
+    text-align:  center;
+    vertical-align: middle;
+  }
+}
+
 
 // Stats
 @mixin statsBorder {
@@ -48,9 +168,13 @@ td:first-child {
 
 @mixin statsPadding {
   line-height: 3em;
-  width: 65px;
-  padding: 0px;
-  margin: 0px;
+  width: 50px;
+  padding: 0;
+  margin: 0;
+
+  @media print {
+    width: 35px;
+  }
 }
 
 .stats {
@@ -74,3 +198,18 @@ td:first-child {
   @include statsPadding;
   background-color: #eeeeee;
 }
+
+
+/*
+ * PRINT OVERRIDES
+ */
+
+@media print {
+  h1 {
+    page-break-before: always;
+    font-size: 1.5em;
+  }
+
+  h1:first-child { page-break-before: avoid; }
+}
+

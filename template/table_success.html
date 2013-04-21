@@ -1,0 +1,16 @@
+<table>
+<tr>
+    <th><span><%= info %></span></th>
+<% _.each(labels.top, function(label) { %>
+    <th><span><%= label %></span></th>
+<% }) %>
+</tr>
+<% for (var i = 1; i < cols[0].length; i++) { %>
+<tr>
+    <td><span><%= i %></span></td>
+<% for (var j = 0; j < cols.length; j++) { %>
+    <td><%= (cols[j][i] != undefined) ? cols[j][i] + "%" : "-" %></td>
+<% } %>
+</tr>
+<% } %>
+</table>

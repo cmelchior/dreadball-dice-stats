@@ -7,9 +7,31 @@
 </head>
 <body>
 <div id="app">
-<% for (var i = 0; i < tables.length; i++) { %>
-    <%= tables[i] %>
+
+<h1>Chance for minimum number of successes</h1>
+<div id="successes">
+<div class="section">
+<% for (var i = 0; i < successes.length; i++) { %>
+    <% if (i % 3 == 0) { %>
+        </div><div class="section">
+    <% } %>
+    <%= successes[i] %>
 <% } %>
+</div>
+</div>
+
+
+
+<h1>Chance for at least draw/success/double success</h1>
+<div id="opposed_rolls">
+<div class="section">
+<% for (var j = 0; j < opposedRolls.length; j++) { %>
+    <% if (j % 3 == 0) { %>
+        </div><div class="section">
+    <% } %>
+    <%= opposedRolls[j] %>
+<% } %>
+</div>
 </div>
 
 <script type="text/javascript" src="js/lib/jquery-1.9.1.min.js"></script>

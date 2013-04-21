@@ -1,7 +1,17 @@
 body {
   padding: 1em;
   font-family: verdana;
-  font-size: 0.8em; }
+  font-size: 10px; }
+
+h1 {
+  margin: 0;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  clear: both; }
+
+h1:first-child {
+  padding-top: 0;
+  margin-top: 0; }
 
 table {
   border: 0.2em solid #333333;
@@ -9,20 +19,88 @@ table {
   float: left;
   border-spacing: 0px;
   border-collapse: collapse; }
+  @media print {
+    table {
+      margin: 0.2em; } }
 
-th {
+tr:nth-child(2) {
+  background-color: #A0A0A0; }
+
+tr:nth-child(3) {
+  background-color: #A8A8A8; }
+
+tr:nth-child(4) {
+  background-color: #B0B0B0; }
+
+tr:nth-child(5) {
+  background-color: #B8B8B8; }
+
+tr:nth-child(6) {
+  background-color: #C0C0C0; }
+
+tr:nth-child(7) {
+  background-color: #C8C8C8; }
+
+tr:nth-child(8) {
+  background-color: #D0D0D0; }
+
+tr:nth-child(9) {
+  background-color: #D8D8D8; }
+
+tr:nth-child(10) {
+  background-color: #E0E0E0; }
+
+tr:nth-child(11) {
+  background-color: #E8E8E8; }
+
+tr:nth-child(12) {
+  background-color: #F0F0F0; }
+
+tr:nth-child(13) {
+  background-color: #F8F8F8; }
+
+D#successes table {
+  float: left; }
+D#successes th {
+  border: 0.2em solid #333333;
+  padding: 1em; }
+D#successes td:first-child {
+  background-color: white;
+  font-weight: bold;
+  vertical-align: middle;
+  width: 35px; }
+D#successes td {
+  border: 0.2em solid #333333;
+  padding: 1em;
+  text-align: center;
+  width: 30px; }
+  @media print {
+    D#successes td {
+      width: 30gpx; } }
+
+#opposed_rolls .section:first-child {
+  display: none;
+  width: 100%;
+  page-break-before: avoid !important; }
+#opposed_rolls .section:nth-child(2) {
+  page-break-before: avoid !important; }
+#opposed_rolls .section {
+  page-break-before: always;
+  clear: both; }
+#opposed_rolls th {
   border: 0.2em solid #333333;
   background-color: white; }
-
-th span {
+#opposed_rolls th span {
   display: block;
   margin: 1em; }
-
-td {
+  @media print {
+    #opposed_rolls th span {
+      margin: 0.5em; } }
+#opposed_rolls td {
   border: 0.2em solid #333333;
   padding: 0px; }
-
-td:first-child {
+#opposed_rolls td:first-child {
+  background-color: white;
   font-weight: bold;
   text-align: center;
   vertical-align: middle; }
@@ -34,22 +112,42 @@ td:first-child {
 .top p {
   border-bottom: 1px solid #333333;
   line-height: 3em;
-  width: 65px;
-  padding: 0px;
-  margin: 0px;
+  width: 50px;
+  padding: 0;
+  margin: 0;
   background-color: #aaaaaa; }
+  @media print {
+    .top p {
+      width: 35px; } }
 
 .middle p {
   border-bottom: 1px solid #333333;
   line-height: 3em;
-  width: 65px;
-  padding: 0px;
-  margin: 0px;
+  width: 50px;
+  padding: 0;
+  margin: 0;
   background-color: #cccccc; }
+  @media print {
+    .middle p {
+      width: 35px; } }
 
 .bottom p {
   line-height: 3em;
-  width: 65px;
-  padding: 0px;
-  margin: 0px;
+  width: 50px;
+  padding: 0;
+  margin: 0;
   background-color: #eeeeee; }
+  @media print {
+    .bottom p {
+      width: 35px; } }
+
+/*
+ * PRINT OVERRIDES
+ */
+@media print {
+  h1 {
+    page-break-before: always;
+    font-size: 1.5em; }
+
+  h1:first-child {
+    page-break-before: avoid; } }
