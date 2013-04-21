@@ -59,24 +59,24 @@ tr:nth-child(12) {
 tr:nth-child(13) {
   background-color: #F8F8F8; }
 
-D#successes table {
+#successes table {
   float: left; }
-D#successes th {
+#successes th {
   border: 0.2em solid #333333;
   padding: 1em; }
-D#successes td:first-child {
+#successes td:first-child {
   background-color: white;
   font-weight: bold;
   vertical-align: middle;
   width: 35px; }
-D#successes td {
+#successes td {
   border: 0.2em solid #333333;
   padding: 1em;
   text-align: center;
   width: 30px; }
   @media print {
-    D#successes td {
-      width: 30gpx; } }
+    #successes td {
+      width: 30px; } }
 
 #opposed_rolls .section:first-child {
   display: none;

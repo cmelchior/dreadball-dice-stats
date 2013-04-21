@@ -85,7 +85,7 @@ tr:nth-child(13) {
   background-color: #F8F8F8;
 }
 
-D#successes {
+#successes {
 
   table {
     float: left;
@@ -110,7 +110,7 @@ D#successes {
     width: 30px;
 
     @media print {
-      width: 30gpx;
+      width: 30px;
     }
   }
 
